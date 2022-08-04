@@ -1,3 +1,5 @@
+// citation: react framework adapted from Oregon State University, CS290, Module 5 - React and Module 9 - Full Stack MERN Apps, Spring 2022
+
 import React from 'react';
 import OrderList from '../components/OrderList';
 import { useState, useEffect } from 'react';
@@ -10,12 +12,13 @@ function HomePage({ setOrderToEdit }) {
     const loadOrders = async () => {
         const response = await fetch('/orders');
         const orders = await response.json();
+        // console.log(orders);
         setOrders(orders);
     }
 
     useEffect(() => {
         loadOrders();
-    }, []);
+    });
 
     const onDelete = async _id => {
         const response = await fetch(`/orders/${_id}`, { method: 'DELETE' });

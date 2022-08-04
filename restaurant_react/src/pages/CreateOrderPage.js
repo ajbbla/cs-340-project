@@ -1,3 +1,5 @@
+// citation: react framework adapted from Oregon State University, CS290, Module 5 - React and Module 9 - Full Stack MERN Apps, Spring 2022
+
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
