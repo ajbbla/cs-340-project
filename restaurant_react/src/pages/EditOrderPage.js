@@ -32,7 +32,7 @@ function EditOrderPage({ orderToEdit }) {
         <div>
             <h1>Edit Order</h1>
             <input
-                type="text"
+                type="datetime-local"
                 value={dateTime}
                 onChange={e => setDateTime(e.target.value)} />
             <input

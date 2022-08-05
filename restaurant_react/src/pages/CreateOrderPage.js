@@ -31,7 +31,7 @@ function CreateOrderPage() {
         <div>
             <h1>Add Order</h1>
             <input
-                type="text"
+                type="datetime-local"
                 placeholder="Enter dateTime here"
                 value={dateTime}
                 onChange={e => setDateTime(e.target.value)} />
