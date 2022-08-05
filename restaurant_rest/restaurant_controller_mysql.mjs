@@ -12,9 +12,9 @@ import mysql from 'mysql';
 var pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'classmysql.engr.oregonstate.edu',
-    user            : 'cs340_immermam',
-    password        : '8923',
-    database        : 'cs340_immermam'
+    user            : 'cs340_blantona',
+    password        : '4032',
+    database        : 'cs340_blantona'
 })
 
 const PORT = process.env.PORT;

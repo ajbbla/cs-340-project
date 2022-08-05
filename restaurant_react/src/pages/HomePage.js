@@ -18,15 +18,16 @@ function HomePage({ setOrderToEdit }) {
 
     useEffect(() => {
         loadOrders();
-    });
+    }, []);
 
     const onDelete = async _id => {
         const response = await fetch(`/orders/${_id}`, { method: 'DELETE' });
         if (response.status === 204) {
             setOrders(orders.filter(e => e._id !== _id));
+            loadOrders();
         } else {
-        console.error(`Failed to delete order with id = ${_id}, status code = ${response.status}`)
-        }
+            console.error(`Failed to delete order with id = ${_id}, status code = ${response.status}`)
+        } 
     }
 
     const onEdit = order => {
