@@ -11,10 +11,10 @@ import mysql from 'mysql';
 // Create a 'connection pool' using the provided credentials
 var pool = mysql.createPool({
     connectionLimit : 10,
-    host            : 'classmysql.engr.oregonstate.edu',
-    user            : 'cs340_blantona',
-    password        : '4032',
-    database        : 'cs340_blantona'
+    host            : 'localhost',
+    user            : 'root',
+    password        : 'dV&SX#Gq@DQZ*m2&8XRh',
+    database        : 'restaurant'
 })
 
 const PORT = process.env.PORT;
@@ -53,6 +53,41 @@ app.put('/orders/:_id', (req, res) => {
 
 app.delete('/orders/:_id', (req, res) => {
     let query4 = `DELETE FROM Orders WHERE orderID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
+// /**
+//  * Retrieve all dishes
+//  */
+app.get('/dishes', (req, res) => {
+    let query1 = "SELECT * FROM Dishes;";
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new dish with the dateTime, totalPrice, serverID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
+//  */
+app.post('/dishes', (req, res) => {
+    let query2 = `INSERT INTO Dishes (dishName, price, spiceLevel, currentMenu, stockLevel) VALUES ('${req.body.dishName}', ${req.body.price}, ${req.body.spiceLevel}, ${req.body.currentMenu}, '${req.body.stockLevel}');`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/dishes/:_id', (req, res) => {
+    let query3 = `UPDATE Dishes SET dishName = '${req.body.dishName}', price = ${req.body.price}, spiceLevel = ${req.body.spiceLevel}, currentMenu = ${req.body.currentMenu}, stockLevel = '${req.body.stockLevel}' WHERE dishID = ${req.body.dishID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/dishes/:_id', (req, res) => {
+    let query4 = `DELETE FROM Dishes WHERE dishID = ${req.params._id};`;
     pool.query(query4, (error, row, fields) => {
         res.status(204).send();
     })
