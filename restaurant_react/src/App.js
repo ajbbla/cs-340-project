@@ -6,11 +6,15 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ViewOrdersPage from './pages/ViewOrdersPage';
 import CreateOrderPage from './pages/CreateOrderPage';
 import EditOrderPage from './pages/EditOrderPage';
+import ViewDishesPage from './pages/ViewDishesPage';
+import CreateDishPage from './pages/CreateDishPage';
+import EditDishPage from './pages/EditDishPage';
 import Navigation from './components/Navigation';
 import { useState } from 'react';
 
 function App() {
   const [orderToEdit, setOrderToEdit] = useState();
+  const [dishToEdit, setDishToEdit] = useState();
   return (
     <div className="App">
       <header>
@@ -30,6 +34,15 @@ function App() {
           </Route>
           <Route path="/edit-order">
             <EditOrderPage orderToEdit={orderToEdit} />
+          </Route>
+          <Route path="/view-dishes">
+            <ViewDishesPage setDishToEdit={setDishToEdit} />
+          </Route>
+          <Route path="/add-dish">
+            <CreateDishPage />
+          </Route>
+          <Route path="/edit-dish">
+            <EditDishPage dishToEdit={dishToEdit} />
           </Route>
         </div>
       </Router>

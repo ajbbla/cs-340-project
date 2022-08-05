@@ -6,9 +6,13 @@ import { Link } from 'react-router-dom';
 function Navigation() {
     return (
         <nav>
-            <Link to="/view-orders">Go to Home Page</Link>
+            <Link to="/view-orders">Go to View Orders Page</Link>
             <br></br>
             <Link to="/add-order">Go to Create Order Page</Link>
+            <br></br>
+            <Link to="/view-dishes">Go to View Dishes Page</Link>
+            <br></br>
+            <Link to="/add-dish">Go to Create Dish Page</Link>
         </nav>
     );
 }
