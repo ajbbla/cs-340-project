@@ -3,7 +3,7 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import ViewOrdersPage from './pages/ViewOrdersPage';
 import CreateOrderPage from './pages/CreateOrderPage';
 import EditOrderPage from './pages/EditOrderPage';
 import Navigation from './components/Navigation';
@@ -22,8 +22,8 @@ function App() {
       <Router>
         <Navigation />
         <div className="App-header">
-          <Route path="/" exact>
-            <HomePage setOrderToEdit={setOrderToEdit} />
+          <Route path="/view-orders">
+            <ViewOrdersPage setOrderToEdit={setOrderToEdit} />
           </Route>
           <Route path="/add-order">
             <CreateOrderPage />
