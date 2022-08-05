@@ -3,6 +3,7 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 import ViewOrdersPage from './pages/ViewOrdersPage';
 import CreateOrderPage from './pages/CreateOrderPage';
 import EditOrderPage from './pages/EditOrderPage';
@@ -18,14 +19,21 @@ function App() {
   return (
     <div className="App">
       <header>
-          <h1>A database application to manage food waste at a restaurant</h1>
-          <p>This is an application to create, edit, and delete records of
-              ingredients, dishes, orders, suppliers, and servers.
+          <h1>For Each Page:</h1>
+          <h2>Below is an Entity: an Object, Event, or Category</h2>
+          <p>View the Entity Records in the table<br></br>
+            Use the Relevant "Create..." Link to Add a Records<br></br>
+            Click a "View..." Link to View a Different Entity<br></br>
+            Click the Edit Icon (Pen) next to a Record<br></br>
+            Click the Delete Icon (Trash) next to a Record
           </p>
       </header>
       <Router>
         <Navigation />
         <div className="App-header">
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
           <Route path="/view-orders">
             <ViewOrdersPage setOrderToEdit={setOrderToEdit} />
           </Route>
