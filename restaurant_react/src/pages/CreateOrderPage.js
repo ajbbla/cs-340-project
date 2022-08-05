@@ -24,7 +24,7 @@ function CreateOrderPage() {
         } else {
             alert(`Failed to add order, status code = ${response.status}`);
         }
-        history.push("/");
+        history.push("/view-orders");
     };
 
     return (

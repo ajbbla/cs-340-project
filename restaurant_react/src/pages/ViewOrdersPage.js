@@ -5,7 +5,7 @@ import OrderList from '../components/OrderList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function HomePage({ setOrderToEdit }) {
+function ViewOrdersPage({ setOrderToEdit }) {
     const [orders, setOrders] = useState([]);
     const history = useHistory();
 
@@ -43,4 +43,4 @@ function HomePage({ setOrderToEdit }) {
     );
 }
 
-export default HomePage;
+export default ViewOrdersPage;

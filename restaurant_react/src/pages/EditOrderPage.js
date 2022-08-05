@@ -25,7 +25,7 @@ function EditOrderPage({ orderToEdit }) {
         } else {
             alert(`Failed to edit order, status code = ${response.status}`);
         }
-        history.push("/");
+        history.push("/view-orders");
     };
 
     return (
