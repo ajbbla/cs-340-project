@@ -10,12 +10,16 @@ import EditOrderPage from './pages/EditOrderPage';
 import ViewDishesPage from './pages/ViewDishesPage';
 import CreateDishPage from './pages/CreateDishPage';
 import EditDishPage from './pages/EditDishPage';
+import ViewIngredientsPage from './pages/ViewIngredientsPage';
+import CreateIngredientPage from './pages/CreateIngredientPage';
+import EditIngredientPage from './pages/EditIngredientPage';
 import Navigation from './components/Navigation';
 import { useState } from 'react';
 
 function App() {
   const [orderToEdit, setOrderToEdit] = useState();
   const [dishToEdit, setDishToEdit] = useState();
+  const [ingredientToEdit, setIngredientToEdit] = useState();
   return (
     <div className="App">
       <header>
@@ -51,6 +55,15 @@ function App() {
           </Route>
           <Route path="/edit-dish">
             <EditDishPage dishToEdit={dishToEdit} />
+          </Route>
+         <Route path="/view-ingredients">
+            <ViewIngredientsPage setIngredientToEdit={setIngredientToEdit} />
+          </Route>
+          <Route path="/add-ingredient">
+            <CreateIngredientPage />
+          </Route>
+          <Route path="/edit-ingredient">
+            <EditIngredientPage ingredientToEdit={ingredientToEdit} />
           </Route>
         </div>
       </Router>
