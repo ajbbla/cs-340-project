@@ -71,6 +71,7 @@ function App() {
           </Route>
           <Route path="/edit-orderDish">
             <EditOrderDishPage orderDishToEdit={orderDishToEdit} />
+          </Route>
 
          <Route path="/view-ingredients">
             <ViewIngredientsPage setIngredientToEdit={setIngredientToEdit} />
@@ -80,7 +81,6 @@ function App() {
           </Route>
           <Route path="/edit-ingredient">
             <EditIngredientPage ingredientToEdit={ingredientToEdit} />
-
           </Route>
         </div>
       </Router>
