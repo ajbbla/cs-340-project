@@ -8,13 +8,20 @@ function Navigation() {
         <nav>
             <Link to="/">Go to Home Page</Link>
             <br></br>
+
             <Link to="/view-orders">Go to View Orders Page</Link>
             <br></br>
             <Link to="/add-order">Go to Create Order Page</Link>
             <br></br>
+
             <Link to="/view-dishes">Go to View Dishes Page</Link>
             <br></br>
             <Link to="/add-dish">Go to Create Dish Page</Link>
+            <br></br>
+
+            <Link to="/view-orderDishes">Go to View OrderDishes Page</Link>
+            <br></br>
+            <Link to="/add-orderDish">Go to Create OrderDish Page</Link>
         </nav>
     );
 }

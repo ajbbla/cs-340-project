@@ -10,12 +10,16 @@ import EditOrderPage from './pages/EditOrderPage';
 import ViewDishesPage from './pages/ViewDishesPage';
 import CreateDishPage from './pages/CreateDishPage';
 import EditDishPage from './pages/EditDishPage';
+import ViewOrderDishesPage from './pages/ViewOrderDishesPage';
+import CreateOrderDishPage from './pages/CreateOrderDishPage';
+import EditOrderDishPage from './pages/EditOrderDishPage';
 import Navigation from './components/Navigation';
 import { useState } from 'react';
 
 function App() {
   const [orderToEdit, setOrderToEdit] = useState();
   const [dishToEdit, setDishToEdit] = useState();
+  const [orderDishToEdit, setOrderDishToEdit] = useState();
   return (
     <div className="App">
       <header>
@@ -34,6 +38,7 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
+
           <Route path="/view-orders">
             <ViewOrdersPage setOrderToEdit={setOrderToEdit} />
           </Route>
@@ -43,6 +48,7 @@ function App() {
           <Route path="/edit-order">
             <EditOrderPage orderToEdit={orderToEdit} />
           </Route>
+
           <Route path="/view-dishes">
             <ViewDishesPage setDishToEdit={setDishToEdit} />
           </Route>
@@ -51,6 +57,16 @@ function App() {
           </Route>
           <Route path="/edit-dish">
             <EditDishPage dishToEdit={dishToEdit} />
+          </Route>
+          
+          <Route path="/view-orderDishes">
+            <ViewOrderDishesPage setOrderDishToEdit={setOrderDishToEdit} />
+          </Route>
+          <Route path="/add-orderDish">
+            <CreateOrderDishPage />
+          </Route>
+          <Route path="/edit-orderDish">
+            <EditOrderDishPage orderDishToEdit={orderDishToEdit} />
           </Route>
         </div>
       </Router>
