@@ -117,14 +117,14 @@ app.get('/ingredients', (req, res) => {
 //    currentStockQty:Number(currentStockQty)
 //  */
 app.post('/ingredients', (req, res) => {
-    let query2 = `INSERT INTO Ingredients (ingredientName, color, plantFamily, foodGroup, avgShelfLifeDays, spiceLevel, currentIngredient, currentStockQty) VALUES (${req.body.ingredientName}, ${req.body.color}, ${req.body.plantFamily}, ${req.body.foodGroup}, ${req.body.avgShelfLifeDays}, ${req.body.spiceLevel}, ${req.body.currentIngredient}, ${req.body.currentStockQty});`;
+    let query2 = `INSERT INTO Ingredients (ingredientName, color, plantFamily, foodGroup, avgShelfLifeDays, spiceLevel, currentIngredient, currentStockQty) VALUES ('${req.body.ingredientName}', '${req.body.color}', '${req.body.plantFamily}', '${req.body.foodGroup}', ${req.body.avgShelfLifeDays}, ${req.body.spiceLevel}, ${req.body.currentIngredient}, ${req.body.currentStockQty});`;
     pool.query(query2, (error, row, fields) => {
         res.status(201).json(row);
     })
 });
 
 app.put('/ingredients/:_id', (req, res) => {
-    let query3 = `UPDATE Ingredients SET ingredientName = ${req.body.ingredientName}, color = ${req.body.color}, plantFamily = ${req.body.plantFamily}, foodGroup = ${req.body.foodGroup}, avgShelfLifeDays = ${req.body.avgShelfLifeDays}, spiceLevel = ${req.body.spiceLevel}, currentIngredient = ${req.body.currentIngredient}, currentStockQty = ${req.body.currentStockQty} WHERE ingredientID = ${req.body.ingredientID};`;
+    let query3 = `UPDATE Ingredients SET ingredientName = '${req.body.ingredientName}', color = '${req.body.color}', plantFamily = '${req.body.plantFamily}', foodGroup = '${req.body.foodGroup}', avgShelfLifeDays = ${req.body.avgShelfLifeDays}, spiceLevel = ${req.body.spiceLevel}, currentIngredient = ${req.body.currentIngredient}, currentStockQty = ${req.body.currentStockQty} WHERE ingredientID = ${req.body.ingredientID};`;
     pool.query(query3, (error, row, fields) => {
         res.send();
     })
