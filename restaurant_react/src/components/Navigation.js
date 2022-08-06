@@ -22,6 +22,10 @@ function Navigation() {
             <Link to="/view-orderDishes">Go to View OrderDishes Page</Link>
             <br></br>
             <Link to="/add-orderDish">Go to Create OrderDish Page</Link>
+
+            <Link to="/view-ingredients">Go to View Ingredients Page</Link>
+            <br></br>
+            <Link to="/add-ingredient">Go to Create Ingredient Page</Link>
         </nav>
     );
 }
