@@ -5,14 +5,14 @@ import { useHistory } from "react-router-dom";
 
 function EditIngredientPage({ ingredientToEdit }) {
     const [ingredientID, setIngredientID] = useState(ingredientToEdit.ingredientID);
-    const [ingredientName, setIngredientName] = useState('');
-    const [color, setColor] = useState('');
-    const [plantFamily, setPlantFamily] = useState('');
-    const [foodGroup, setFoodGroup] = useState('');
-    const [avgShelfLifeDays, setAvgShelfLifeDays] = useState('');
-    const [spiceLevel, setSpiceLevel] = useState('');
-    const [currentIngredient, setCurrentIngredient] = useState('');
-    const [currentStockQty, setCurrentStockQty] = useState('');
+    const [ingredientName, setIngredientName] = useState(ingredientToEdit.ingredientName);
+    const [color, setColor] = useState(ingredientToEdit.color);
+    const [plantFamily, setPlantFamily] = useState(ingredientToEdit.plantFamily);
+    const [foodGroup, setFoodGroup] = useState(ingredientToEdit.foodGroup);
+    const [avgShelfLifeDays, setAvgShelfLifeDays] = useState(ingredientToEdit.avgShelfLifeDays);
+    const [spiceLevel, setSpiceLevel] = useState(ingredientToEdit.spiceLevel);
+    const [currentIngredient, setCurrentIngredient] = useState(ingredientToEdit.currentIngredient);
+    const [currentStockQty, setCurrentStockQty] = useState(ingredientToEdit.currentStockQty);
 
     const history = useHistory();
 
