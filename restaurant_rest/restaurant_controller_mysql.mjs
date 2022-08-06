@@ -137,6 +137,42 @@ app.delete('/ingredients/:_id', (req, res) => {
     })
 });
 
+
+// /**
+//  * Retrieve all orderDishes
+//  */
+app.get('/orderDishes', (req, res) => {
+    let query1 = "SELECT * FROM OrderDishes;";
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new orderDish with the dateTime, totalPrice, serverID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
+//  */
+app.post('/orderDishes', (req, res) => {
+    let query2 = `INSERT INTO OrderDishes (orderID, dishID, quantity) VALUES (${req.body.orderID}, ${req.body.dishID}, ${req.body.quantity});`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/orderDishes/:_id', (req, res) => {
+    let query3 = `UPDATE OrderDishes SET orderID = ${req.body.orderID}, dishID = ${req.body.dishID}, quantity = ${req.body.quantity} WHERE orderDishID = ${req.body.orderDishID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/orderDishes/:_id', (req, res) => {
+    let query4 = `DELETE FROM OrderDishes WHERE orderDishID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
 });

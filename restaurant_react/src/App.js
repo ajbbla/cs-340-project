@@ -10,6 +10,9 @@ import EditOrderPage from './pages/EditOrderPage';
 import ViewDishesPage from './pages/ViewDishesPage';
 import CreateDishPage from './pages/CreateDishPage';
 import EditDishPage from './pages/EditDishPage';
+import ViewOrderDishesPage from './pages/ViewOrderDishesPage';
+import CreateOrderDishPage from './pages/CreateOrderDishPage';
+import EditOrderDishPage from './pages/EditOrderDishPage';
 import ViewIngredientsPage from './pages/ViewIngredientsPage';
 import CreateIngredientPage from './pages/CreateIngredientPage';
 import EditIngredientPage from './pages/EditIngredientPage';
@@ -19,6 +22,7 @@ import { useState } from 'react';
 function App() {
   const [orderToEdit, setOrderToEdit] = useState();
   const [dishToEdit, setDishToEdit] = useState();
+  const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
   return (
     <div className="App">
@@ -38,6 +42,7 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
+
           <Route path="/view-orders">
             <ViewOrdersPage setOrderToEdit={setOrderToEdit} />
           </Route>
@@ -47,6 +52,7 @@ function App() {
           <Route path="/edit-order">
             <EditOrderPage orderToEdit={orderToEdit} />
           </Route>
+
           <Route path="/view-dishes">
             <ViewDishesPage setDishToEdit={setDishToEdit} />
           </Route>
@@ -56,6 +62,16 @@ function App() {
           <Route path="/edit-dish">
             <EditDishPage dishToEdit={dishToEdit} />
           </Route>
+          
+          <Route path="/view-orderDishes">
+            <ViewOrderDishesPage setOrderDishToEdit={setOrderDishToEdit} />
+          </Route>
+          <Route path="/add-orderDish">
+            <CreateOrderDishPage />
+          </Route>
+          <Route path="/edit-orderDish">
+            <EditOrderDishPage orderDishToEdit={orderDishToEdit} />
+
          <Route path="/view-ingredients">
             <ViewIngredientsPage setIngredientToEdit={setIngredientToEdit} />
           </Route>
@@ -64,6 +80,7 @@ function App() {
           </Route>
           <Route path="/edit-ingredient">
             <EditIngredientPage ingredientToEdit={ingredientToEdit} />
+
           </Route>
         </div>
       </Router>
