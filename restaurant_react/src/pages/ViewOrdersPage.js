@@ -5,20 +5,9 @@ import OrderList from '../components/OrderList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewOrdersPage({ setOrderToEdit, orders, setOrders }) {
+function ViewOrdersPage({ setOrderToEdit, orders, setOrders, loadOrders }) {
     // const [orders, setOrders] = useState([]);
     const history = useHistory();
-
-    const loadOrders = async () => {
-        const response = await fetch('/orders');
-        const orders = await response.json();
-        // console.log(orders);
-        setOrders(orders);
-    }
-
-    useEffect(() => {
-        loadOrders();
-    }, []);
 
     const onDelete = async _id => {
         const response = await fetch(`/orders/${_id}`, { method: 'DELETE' });

@@ -5,19 +5,9 @@ import DishList from '../components/DishList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewDishesPage({ setDishToEdit, dishes, setDishes }) {
+function ViewDishesPage({ setDishToEdit, dishes, setDishes, loadDishes }) {
     // const [dishes, setDishes] = useState([]);
     const history = useHistory();
-
-    const loadDishes = async () => {
-        const response = await fetch('/dishes');
-        const dishes = await response.json();
-        setDishes(dishes);
-    }
-
-    useEffect(() => {
-        loadDishes();
-    }, []);
 
     const onDelete = async _id => {
         const response = await fetch(`/dishes/${_id}`, { method: 'DELETE' });

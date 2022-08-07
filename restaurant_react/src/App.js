@@ -17,7 +17,7 @@ import ViewIngredientsPage from './pages/ViewIngredientsPage';
 import CreateIngredientPage from './pages/CreateIngredientPage';
 import EditIngredientPage from './pages/EditIngredientPage';
 import Navigation from './components/Navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [orderToEdit, setOrderToEdit] = useState();
@@ -27,6 +27,25 @@ function App() {
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
+
+  const loadOrders = async () => {
+    const response = await fetch('/orders');
+    const orders = await response.json();
+    // console.log(orders);
+    setOrders(orders);
+  }
+
+  const loadDishes = async () => {
+    const response = await fetch('/dishes');
+    const dishes = await response.json();
+    setDishes(dishes);
+}
+
+  useEffect(() => {
+      loadOrders();
+      loadDishes();
+  }, []);
+
   return (
     <div className="App">
       <header>
@@ -47,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="/view-orders">
-            <ViewOrdersPage setOrderToEdit={setOrderToEdit} orders={orders} setOrders={setOrders} />
+            <ViewOrdersPage setOrderToEdit={setOrderToEdit} orders={orders} setOrders={setOrders} loadOrders={loadOrders} />
           </Route>
           <Route path="/add-order">
             <CreateOrderPage />
@@ -57,7 +76,7 @@ function App() {
           </Route>
 
           <Route path="/view-dishes">
-            <ViewDishesPage setDishToEdit={setDishToEdit} dishes={dishes} setDishes={setDishes} />
+            <ViewDishesPage setDishToEdit={setDishToEdit} dishes={dishes} setDishes={setDishes} loadDishes={loadDishes} />
           </Route>
           <Route path="/add-dish">
             <CreateDishPage />
