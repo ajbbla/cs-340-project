@@ -5,8 +5,8 @@ import OrderList from '../components/OrderList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewOrdersPage({ setOrderToEdit }) {
-    const [orders, setOrders] = useState([]);
+function ViewOrdersPage({ setOrderToEdit, orders, setOrders }) {
+    // const [orders, setOrders] = useState([]);
     const history = useHistory();
 
     const loadOrders = async () => {

@@ -5,8 +5,8 @@ import DishList from '../components/DishList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewDishesPage({ setDishToEdit }) {
-    const [dishes, setDishes] = useState([]);
+function ViewDishesPage({ setDishToEdit, dishes, setDishes }) {
+    // const [dishes, setDishes] = useState([]);
     const history = useHistory();
 
     const loadDishes = async () => {

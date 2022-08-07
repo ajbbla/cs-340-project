@@ -24,6 +24,9 @@ function App() {
   const [dishToEdit, setDishToEdit] = useState();
   const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
+
+  const [orders, setOrders] = useState([]);
+  const [dishes, setDishes] = useState([]);
   return (
     <div className="App">
       <header>
@@ -44,7 +47,7 @@ function App() {
           </Route>
 
           <Route path="/view-orders">
-            <ViewOrdersPage setOrderToEdit={setOrderToEdit} />
+            <ViewOrdersPage setOrderToEdit={setOrderToEdit} orders={orders} setOrders={setOrders} />
           </Route>
           <Route path="/add-order">
             <CreateOrderPage />
@@ -54,7 +57,7 @@ function App() {
           </Route>
 
           <Route path="/view-dishes">
-            <ViewDishesPage setDishToEdit={setDishToEdit} />
+            <ViewDishesPage setDishToEdit={setDishToEdit} dishes={dishes} setDishes={setDishes} />
           </Route>
           <Route path="/add-dish">
             <CreateDishPage />
@@ -67,10 +70,10 @@ function App() {
             <ViewOrderDishesPage setOrderDishToEdit={setOrderDishToEdit} />
           </Route>
           <Route path="/add-orderDish">
-            <CreateOrderDishPage />
+            <CreateOrderDishPage orders={orders} dishes={dishes} />
           </Route>
           <Route path="/edit-orderDish">
-            <EditOrderDishPage orderDishToEdit={orderDishToEdit} />
+            <EditOrderDishPage orderDishToEdit={orderDishToEdit} orders={orders} dishes={dishes} />
           </Route>
 
          <Route path="/view-ingredients">

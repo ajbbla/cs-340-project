@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import OrderID from '../components/OrderID';
+import DishID from '../components/DishID';
 
-function CreateOrderDishPage() {
-    const [orderID, setOrderID] = useState('');
-    const [dishID, setDishID] = useState('');
+function CreateOrderDishPage({ orders, dishes }) {
+    const [orderID, setOrderID] = useState(1);
+    const [dishID, setDishID] = useState(1);
     const [quantity, setQuantity] = useState('');
 
     const history = useHistory();
@@ -30,16 +32,12 @@ function CreateOrderDishPage() {
     return (
         <div>
             <h1>Add OrderDish</h1>
-            <input
-                type="text"
-                placeholder="Enter orderID here"
-                value={orderID}
-                onChange={e => setOrderID(e.target.value)} />
-            <input
-                type="text"
-                placeholder="Enter dishID here"
-                value={dishID}
-                onChange={e => setDishID(e.target.value)} />
+            <select name="orderID" onChange={e => setOrderID(e.target.value)} value={orderID}>
+                {orders.map((order, i) => <OrderID orderID={orderID} order={order} key={i} />)}
+            </select>
+            <select name="dishID" onChange={e => setDishID(e.target.value)} value={dishID}>
+                {dishes.map((dish, i) => <DishID dishID={dishID} dish={dish} key={i} />)}
+            </select>
             <input
                 type="text"
                 placeholder="Enter quantity here"
