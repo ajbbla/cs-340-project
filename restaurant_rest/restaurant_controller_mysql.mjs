@@ -141,11 +141,22 @@ app.delete('/ingredients/:_id', (req, res) => {
 });
 
 
+// // /**
+// //  * Retrieve all orderDishes
+// //  */
+// app.get('/orderDishes', (req, res) => {
+//     let query1 = "SELECT * FROM OrderDishes;";
+//     pool.query(query1, (error, rows, fields) => {
+//         res.send(rows);
+//     })
+// });
+
 // /**
 //  * Retrieve all orderDishes
 //  */
 app.get('/orderDishes', (req, res) => {
-    let query1 = "SELECT * FROM OrderDishes;";
+    let query1 = `SELECT orderDishID, orderID, dishName, quantity FROM OrderDishes
+    JOIN Dishes ON OrderDishes.dishID = Dishes.dishID;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })

@@ -10,7 +10,7 @@ function OrderDishList({ orderDishes, onDelete, onEdit }) {
                 <tr>
                     <th>orderDishID</th>
                     <th>orderID</th>
-                    <th>dishID</th>
+                    <th>dishName</th>
                     <th>quantity</th>
                 </tr>
             </thead>
