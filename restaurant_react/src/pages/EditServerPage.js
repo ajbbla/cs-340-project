@@ -6,9 +6,9 @@ import { useHistory } from "react-router-dom";
 function EditServerPage({ serverToEdit }) {
     const [serverID, setServerID] = useState(serverToEdit.serverID);
     const [serverName, setServerName] = useState(serverToEdit.serverName);
-    const [hireDate, sethireDate] = useState(serverToEdit.hireDate);
-    const [wagePerHour, setSpiceLevel] = useState(serverToEdit.wagePerHour);
-    const [isFullTime, setCurrentMenu] = useState(serverToEdit.isFullTime);
+    const [hireDate, setHireDate] = useState(serverToEdit.hireDate);
+    const [wagePerHour, setWagePerHour] = useState(serverToEdit.wagePerHour);
+    const [isFullTime, setIsFullTime] = useState(serverToEdit.isFullTime);
 
     const history = useHistory();
 
@@ -39,15 +39,15 @@ function EditServerPage({ serverToEdit }) {
             <input
                 type="date"
                 value={hireDate}
-                onChange={e => sethireDate(e.target.value)} />
+                onChange={e => setHireDate(e.target.value)} />
             <input
                 type="number"
                 value={wagePerHour}
-                onChange={e => setSpiceLevel(e.target.value)} />
+                onChange={e => setWagePerHour(e.target.value)} />
             <input
                 type="number"
                 value={isFullTime}
-                onChange={e => setCurrentMenu(e.target.value)} />
+                onChange={e => setIsFullTime(e.target.value)} />
             <button
                 onClick={editServer}
             >Save</button>
