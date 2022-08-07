@@ -1,20 +1,25 @@
 // citation: react framework adapted from Oregon State University, CS290, Module 5 - React and Module 9 - Full Stack MERN Apps, Spring 2022
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import OrderID from '../components/OrderID';
-import DishID from '../components/DishID';
+import DishName from '../components/DishName';
 
 function EditOrderDishPage({ orderDishToEdit, orders, dishes }) {
     const [orderDishID, setOrderDishID] = useState(orderDishToEdit.orderDishID);
     const [orderID, setOrderID] = useState(orderDishToEdit.orderID);
-    const [dishID, setDishID] = useState(orderDishToEdit.dishID);
+    // const [dishID, setDishID] = useState(orderDishToEdit.dishID);
     const [quantity, setQuantity] = useState(orderDishToEdit.quantity);
+
+    // const [dishName, setDishName] = useState(orderDishToEdit.dishID);
+    const [dishName, setDishName] = useState('')
 
     const history = useHistory();
 
     const editOrderDish = async () => {
-        const editedOrderDish = { orderDishID:Number(orderDishID), orderID:Number(orderID), dishID:Number(dishID), quantity:Number(quantity) };
+        // const editedOrderDish = { orderDishID:Number(orderDishID), orderID:Number(orderID), dishID:Number(dishID), quantity:Number(quantity) };
+        const editedOrderDish = { orderDishID:Number(orderDishID), orderID:Number(orderID), dishName, quantity:Number(quantity) };
         const response = await fetch(`/orderDishes/${orderDishToEdit._id}`, {
             method: 'PUT',
             body: JSON.stringify(editedOrderDish),
@@ -36,8 +41,8 @@ function EditOrderDishPage({ orderDishToEdit, orders, dishes }) {
             <select name="orderID" onChange={e => setOrderID(e.target.value)} value={orderID}>
                 {orders.map((order, i) => <OrderID orderID={orderID} order={order} key={i} />)}
             </select>
-            <select name="dishID" onChange={e => setDishID(e.target.value)} value={dishID}>
-                {dishes.map((dish, i) => <DishID dishID={dishID} dish={dish} key={i} />)}
+            <select name="dishName" onChange={e => setDishName(e.target.value)} value={dishName}>
+                {dishes.map((dish, i) => <DishName dish={dish} key={i} />)}
             </select>
             <input
                 type="text"

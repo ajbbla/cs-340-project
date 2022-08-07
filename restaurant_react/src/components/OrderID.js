@@ -1,6 +1,6 @@
 import React from 'react';
 
-function OrderID({ orderID, order }) {
+function OrderID({ order }) {
     return (
         <option value={order.orderID}>{order.orderID}</option>
     );

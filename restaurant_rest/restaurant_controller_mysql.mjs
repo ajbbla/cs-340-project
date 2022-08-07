@@ -170,7 +170,7 @@ app.post('/orderDishes', (req, res) => {
 });
 
 app.put('/orderDishes/:_id', (req, res) => {
-    let query3 = `UPDATE OrderDishes SET orderID = ${req.body.orderID}, dishID = ${req.body.dishID}, quantity = ${req.body.quantity} WHERE orderDishID = ${req.body.orderDishID};`;
+    let query3 = `UPDATE OrderDishes SET orderID = ${req.body.orderID}, dishID = (SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), quantity = ${req.body.quantity} WHERE orderDishID = ${req.body.orderDishID};`;
     pool.query(query3, (error, row, fields) => {
         res.send();
     })
