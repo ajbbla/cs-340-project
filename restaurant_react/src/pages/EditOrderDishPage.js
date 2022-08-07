@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import OrderID from '../components/OrderID';
+import DishID from '../components/DishID';
 
-function EditOrderDishPage({ orderDishToEdit }) {
+function EditOrderDishPage({ orderDishToEdit, orders, dishes }) {
     const [orderDishID, setOrderDishID] = useState(orderDishToEdit.orderDishID);
     const [orderID, setOrderID] = useState(orderDishToEdit.orderID);
     const [dishID, setDishID] = useState(orderDishToEdit.dishID);
@@ -31,14 +33,12 @@ function EditOrderDishPage({ orderDishToEdit }) {
     return (
         <div>
             <h1>Edit OrderDish</h1>
-            <input
-                type="text"
-                value={orderID}
-                onChange={e => setOrderID(e.target.value)} />
-            <input
-                type="text"
-                value={dishID}
-                onChange={e => setDishID(e.target.value)} />
+            <select name="orderID" onChange={e => setOrderID(e.target.value)} value={orderID}>
+                {orders.map((order, i) => <OrderID orderID={orderID} order={order} key={i} />)}
+            </select>
+            <select name="dishID" onChange={e => setDishID(e.target.value)} value={dishID}>
+                {dishes.map((dish, i) => <DishID dishID={dishID} dish={dish} key={i} />)}
+            </select>
             <input
                 type="text"
                 value={quantity}
