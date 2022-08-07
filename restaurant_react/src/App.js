@@ -16,6 +16,9 @@ import EditOrderDishPage from './pages/EditOrderDishPage';
 import ViewIngredientsPage from './pages/ViewIngredientsPage';
 import CreateIngredientPage from './pages/CreateIngredientPage';
 import EditIngredientPage from './pages/EditIngredientPage';
+import ViewServersPage from './pages/ViewServersPage';
+import CreateServerPage from './pages/CreateServerPage';
+import EditServerPage from './pages/EditServerPage';
 import Navigation from './components/Navigation';
 import { useState } from 'react';
 
@@ -24,9 +27,11 @@ function App() {
   const [dishToEdit, setDishToEdit] = useState();
   const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
+  const [serverToEdit, setServerToEdit] = useState();
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
+  const [servers, setServers] = useState([]);
   return (
     <div className="App">
       <header>
@@ -84,6 +89,16 @@ function App() {
           </Route>
           <Route path="/edit-ingredient">
             <EditIngredientPage ingredientToEdit={ingredientToEdit} />
+          </Route>
+
+          <Route path="/view-servers">
+            <ViewServersPage setServerToEdit={setServerToEdit} servers={servers} setServers={setServers} />
+          </Route>
+          <Route path="/add-server">
+            <CreateServerPage />
+          </Route>
+          <Route path="/edit-server">
+            <EditServerPage serverToEdit={serverToEdit} />
           </Route>
         </div>
       </Router>

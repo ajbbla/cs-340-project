@@ -9,22 +9,22 @@ import mysql from 'mysql';
 // import * as r_model from './restaurant_model_mysql.mjs';
 
 // Create a 'connection pool' using the provided credentials
-// var pool = mysql.createPool({
-//     connectionLimit : 10,
-//     host            : 'classmysql.engr.oregonstate.edu',
-//     user            : 'cs340_blantona',
-//     password        : '4032',
-//     database        : 'cs340_blantona'
-// })
-
-// Create a 'connection pool' using the provided credentials
 var pool = mysql.createPool({
-    connectionLimit : 10,   
-    host            : 'localhost',
-    user            : 'root',
-    password        : 'dV&SX#Gq@DQZ*m2&8XRh',
-    database        : 'restaurant'
+    connectionLimit : 10,
+    host            : 'classmysql.engr.oregonstate.edu',
+    user            : 'cs340_blantona',
+    password        : '4032',
+    database        : 'cs340_blantona'
 })
+
+// // Create a 'connection pool' using the provided credentials
+// var pool = mysql.createPool({
+//     connectionLimit : 10,   
+//     host            : 'localhost',
+//     user            : 'root',
+//     password        : 'dV&SX#Gq@DQZ*m2&8XRh',
+//     database        : 'restaurant'
+// })
 
 const PORT = process.env.PORT;
 
@@ -178,6 +178,43 @@ app.put('/orderDishes/:_id', (req, res) => {
 
 app.delete('/orderDishes/:_id', (req, res) => {
     let query4 = `DELETE FROM OrderDishes WHERE orderDishID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
+// /**
+//  * Retrieve all servers
+//  */
+app.get('/servers', (req, res) => {
+    let query1 = "SELECT * FROM Servers;";
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new server with the dateTime, totalPrice, serverID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
+//  */
+app.post('/servers', (req, res) => {
+    let query2 = `INSERT INTO Servers (serverName, hireDate, wagePerHour, isFullTime) VALUES ('${req.body.serverName}', '${req.body.hireDate}', ${req.body.wagePerHour}, ${req.body.isFullTime});`;
+    console.log(query2);
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/servers/:_id', (req, res) => {
+    let query3 = `UPDATE Servers SET serverName = '${req.body.serverName}', hireDate = '${req.body.hireDate}', wagePerHour = ${req.body.wagePerHour}, isFullTime = ${req.body.isFullTime} WHERE serverID = ${req.body.serverID};`;
+    console.log(query3);
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/servers/:_id', (req, res) => {
+    let query4 = `DELETE FROM Servers WHERE serverID = ${req.params._id};`;
     pool.query(query4, (error, row, fields) => {
         res.status(204).send();
     })
