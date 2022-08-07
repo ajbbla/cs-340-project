@@ -268,6 +268,50 @@ app.delete('/suppliers/:_id', (req, res) => {
     })
 });
 
+// /**
+//  * Retrieve all purchases
+//  */
+app.get('/purchases', (req, res) => {
+    let query1 = `SELECT purchaseID, supplierID, ingredientID, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays FROM Purchases
+    JOIN Suppliers ON Purchases.supplierID = Suppliers.supplierID
+    JOIN Ingredients ON Purchases.ingredientID = Ingredients.ingredientID;`;
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new purchase with the dateTime, totalPrice, serverID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
+//  */
+// app.post('/purchases', (req, res) => {
+//     let query2 = `INSERT INTO Purchases (orderID, dishID, quantity) VALUES (${req.body.orderID}, ${req.body.dishID}, ${req.body.quantity});`;
+//     pool.query(query2, (error, row, fields) => {
+//         res.status(201).json(row);
+//     })
+// });
+
+app.post('/purchases', (req, res) => {
+    let query2 = `INSERT INTO Purchases (supplierID, ingredientID, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays) VALUES ((SELECT supplierID FROM Suppliers WHERE supplierName = '${req.body.supplierName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientID}'), ${req.body.costPerGram}, ${req.body.gramQtyPurchased}, '${req.body.purchaseDate}', ${req.body.actualShelfLifeDays});`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/purchases/:_id', (req, res) => {
+    let query3 = `UPDATE Purchases SET supplierID = (SELECT supplierID FROM Suppliers WHERE supplierName = '${req.body.supplierName}'), ingredientID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), costPerGram = ${req.body.costPerGram}, gramQtyPurchased = ${req.body.gramQtyPurchased}, purchaseDate = '${req.body.purchaseDate}', actualShelfLifeDays = ${req.body.actualShelfLifeDays} WHERE purchaseID = ${req.body.purchaseID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/purchases/:_id', (req, res) => {
+    let query4 = `DELETE FROM Purchases WHERE purchaseID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
 app.listen(PORT, () => {
     console.log(`supplier listening on port ${PORT}...`);
 });
