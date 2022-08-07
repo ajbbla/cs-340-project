@@ -16,6 +16,9 @@ import EditOrderDishPage from './pages/EditOrderDishPage';
 import ViewIngredientsPage from './pages/ViewIngredientsPage';
 import CreateIngredientPage from './pages/CreateIngredientPage';
 import EditIngredientPage from './pages/EditIngredientPage';
+import ViewSuppliersPage from './pages/ViewSuppliersPage';
+import CreateSupplierPage from './pages/CreateSupplierPage';
+import EditSupplierPage from './pages/EditSupplierPage';
 import ViewServersPage from './pages/ViewServersPage';
 import CreateServerPage from './pages/CreateServerPage';
 import EditServerPage from './pages/EditServerPage';
@@ -27,10 +30,12 @@ function App() {
   const [dishToEdit, setDishToEdit] = useState();
   const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
+  const [supplierToEdit, setSupplierToEdit] = useState();
   const [serverToEdit, setServerToEdit] = useState();
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
   const [servers, setServers] = useState([]);
 
 
@@ -109,6 +114,16 @@ function App() {
           </Route>
           <Route path="/edit-ingredient">
             <EditIngredientPage ingredientToEdit={ingredientToEdit} />
+          </Route>
+
+          <Route path="/view-suppliers">
+            <ViewSuppliersPage setSupplierToEdit={setSupplierToEdit} suppliers={suppliers} setSuppliers={setSuppliers} />
+          </Route>
+          <Route path="/add-supplier">
+            <CreateSupplierPage />
+          </Route>
+          <Route path="/edit-supplier">
+            <EditSupplierPage supplierToEdit={supplierToEdit} />
           </Route>
 
           <Route path="/view-servers">
