@@ -231,6 +231,43 @@ app.delete('/servers/:_id', (req, res) => {
     })
 });
 
+// /**
+//  * Retrieve all suppliers
+//  */
+app.get('/suppliers', (req, res) => {
+    let query1 = "SELECT * FROM Suppliers;";
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new supplier with the dateTime, totalPrice, supplierID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), supplierID:Number(supplierID)
+//  */
+app.post('/suppliers', (req, res) => {
+    let query2 = `INSERT INTO Suppliers (supplierName, city, state, streetAddress, contactName, contactPhone, contactEmail) VALUES ('${req.body.supplierName}', '${req.body.city}', '${req.body.state}', '${req.body.streetAddress}', '${req.body.contactName}', '${req.body.contactPhone}', '${req.body.contactEmail}');`;
+    console.log(query2);
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/suppliers/:_id', (req, res) => {
+    let query3 = `UPDATE Suppliers SET supplierName = '${req.body.supplierName}', city = '${req.body.city}', state = '${req.body.state}', streetAddress = '${req.body.streetAddress}', contactName = '${req.body.contactName}', contactPhone = '${req.body.contactPhone}', contactEmail = '${req.body.contactEmail}' WHERE supplierID = ${req.body.supplierID};`;
+    console.log(query3);
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/suppliers/:_id', (req, res) => {
+    let query4 = `DELETE FROM Suppliers WHERE supplierID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}...`);
+    console.log(`supplier listening on port ${PORT}...`);
 });
