@@ -31,6 +31,7 @@ function App() {
   const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
   const [supplierToEdit, setSupplierToEdit] = useState();
+  const [purchaseToEdit, setPurchaseToEdit] = useState();
   const [serverToEdit, setServerToEdit] = useState();
 
   const [orders, setOrders] = useState([]);
@@ -124,6 +125,16 @@ function App() {
           </Route>
           <Route path="/edit-supplier">
             <EditSupplierPage supplierToEdit={supplierToEdit} />
+          </Route>
+
+          <Route path="/view-purchases">
+            <ViewPurchasesPage setPurchaseToEdit={setPurchaseToEdit} />
+          </Route>
+          <Route path="/add-purchase">
+            <CreatePurchasePage suppliers={suppliers} ingredients={ingredients} />
+          </Route>
+          <Route path="/edit-purchase">
+            <EditPurchasePage purchaseToEdit={purchaseToEdit} suppliers={suppliers} ingredients={ingredients} />
           </Route>
 
           <Route path="/view-servers">
