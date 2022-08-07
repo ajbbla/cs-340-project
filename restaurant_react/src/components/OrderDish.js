@@ -8,7 +8,7 @@ function OrderDish({ orderDish, onDelete, onEdit }) {
         <tr>
             <td>{orderDish.orderDishID}</td>
             <td>{orderDish.orderID}</td>
-            <td>{orderDish.dishID}</td>
+            <td>{orderDish.dishName}</td>
             <td>{orderDish.quantity}</td>
             <td><MdEdit onClick={() => onEdit(orderDish)} /></td>
             <td>< MdDeleteForever onClick={() => onDelete(orderDish.orderDishID)} /></td>
