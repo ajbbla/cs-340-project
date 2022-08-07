@@ -155,8 +155,15 @@ app.get('/orderDishes', (req, res) => {
 //  * Create a new orderDish with the dateTime, totalPrice, serverID provided in the body
 //  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
 //  */
+// app.post('/orderDishes', (req, res) => {
+//     let query2 = `INSERT INTO OrderDishes (orderID, dishID, quantity) VALUES (${req.body.orderID}, ${req.body.dishID}, ${req.body.quantity});`;
+//     pool.query(query2, (error, row, fields) => {
+//         res.status(201).json(row);
+//     })
+// });
+
 app.post('/orderDishes', (req, res) => {
-    let query2 = `INSERT INTO OrderDishes (orderID, dishID, quantity) VALUES (${req.body.orderID}, ${req.body.dishID}, ${req.body.quantity});`;
+    let query2 = `INSERT INTO OrderDishes (orderID, dishID, quantity) VALUES (${req.body.orderID}, (SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), ${req.body.quantity});`;
     pool.query(query2, (error, row, fields) => {
         res.status(201).json(row);
     })
