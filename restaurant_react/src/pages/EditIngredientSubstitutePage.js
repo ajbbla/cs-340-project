@@ -8,8 +8,8 @@ import SubstituteName from '../components/SubstituteName';
 
 function EditIngredientSubstitutePage({ ingredientSubstituteToEdit, ingredients, substitutes }) {
     const [ingredientSubstituteID, setIngredientSubstituteID] = useState(ingredientSubstituteToEdit.ingredientSubstituteID);
-    const [ingredientName, setIngredientName] = useState('');
-    const [substituteName, setSubstituteName] = useState('');
+    const [ingredientName, setIngredientName] = useState(ingredientSubstituteToEdit.ingredientName);
+    const [substituteName, setSubstituteName] = useState(ingredientSubstituteToEdit.substituteName);
 
     const history = useHistory();
 

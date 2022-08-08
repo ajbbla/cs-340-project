@@ -5,15 +5,8 @@ import ServerList from '../components/ServerList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewServersPage({ setServerToEdit }) {
-    const [servers, setServers] = useState([]);
+function ViewServersPage({ setServerToEdit, servers, setServers, loadServers }) {
     const history = useHistory();
-
-    const loadServers = async () => {
-        const response = await fetch('/servers');
-        const servers = await response.json();
-        setServers(servers);
-    }
 
     useEffect(() => {
         loadServers();

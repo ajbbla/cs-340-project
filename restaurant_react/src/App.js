@@ -50,11 +50,11 @@ function App() {
   const [ingredients, setIngredients] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [substitutes, setSubstitutes] = useState([]);
+  const [servers, setServers] = useState([]);
 
   const loadOrders = async () => {
     const response = await fetch('/orders');
     const orders = await response.json();
-    // console.log(orders);
     setOrders(orders);
   }
 
@@ -82,12 +82,19 @@ function App() {
     setSuppliers(suppliers);
 }
 
+const loadServers = async () => {
+  const response = await fetch('/servers');
+  const servers = await response.json();
+  setServers(servers);
+}
+
   useEffect(() => {
       loadOrders();
       loadDishes();
       loadIngredients();
       loadSuppliers();
       loadSubstitutes();
+      loadServers();
   }, []);
 
   return (
@@ -113,10 +120,10 @@ function App() {
             <ViewOrdersPage setOrderToEdit={setOrderToEdit} orders={orders} setOrders={setOrders} loadOrders={loadOrders} />
           </Route>
           <Route path="/add-order">
-            <CreateOrderPage />
+            <CreateOrderPage servers={servers} />
           </Route>
           <Route path="/edit-order">
-            <EditOrderPage orderToEdit={orderToEdit} />
+            <EditOrderPage orderToEdit={orderToEdit} servers={servers} />
           </Route>
 
           <Route path="/view-dishes">
@@ -180,7 +187,7 @@ function App() {
           </Route>
 
           <Route path="/view-servers">
-            <ViewServersPage setServerToEdit={setServerToEdit} />
+            <ViewServersPage setServerToEdit={setServerToEdit} servers={servers} setServers={setServers} loadServers={loadServers} />
           </Route>
           <Route path="/add-server">
             <CreateServerPage />

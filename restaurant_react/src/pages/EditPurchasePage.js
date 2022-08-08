@@ -12,9 +12,8 @@ function EditPurchasePage({ purchaseToEdit, suppliers, ingredients }) {
     const [gramQtyPurchased, setGramQtyPurchased] = useState(purchaseToEdit.gramQtyPurchased);
     const [purchaseDate, setPurchaseDate] = useState(purchaseToEdit.purchaseDate);
     const [actualShelfLifeDays, setActualShelfLifeDays] = useState(purchaseToEdit.actualShelfLifeDays);
-
-    const [supplierName, setSupplierName] = useState('');
-    const [ingredientName, setIngredientName] = useState('')
+    const [supplierName, setSupplierName] = useState(purchaseToEdit.supplierName);
+    const [ingredientName, setIngredientName] = useState(purchaseToEdit.ingredientName)
 
     const history = useHistory();
 

@@ -9,7 +9,7 @@ function Order({ order, onDelete, onEdit }) {
             <td>{order.orderID}</td>
             <td>{order.dateTime}</td>
             <td>{order.totalPrice}</td>
-            <td>{order.serverID}</td>
+            <td>{order.serverName}</td>
             <td><MdEdit onClick={() => onEdit(order)} /></td>
             <td>< MdDeleteForever onClick={() => onDelete(order.orderID)} /></td>
         </tr>

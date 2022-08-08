@@ -2,17 +2,18 @@
 
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import ServerName from '../components/ServerName';
 
-function EditOrderPage({ orderToEdit }) {
+function EditOrderPage({ orderToEdit, servers }) {
     const [dateTime, setDateTime] = useState(orderToEdit.dateTime);
     const [totalPrice, setTotalPrice] = useState(orderToEdit.totalPrice);
-    const [serverID, setServerID] = useState(orderToEdit.serverID);
+    const [serverName, setServerName] = useState(orderToEdit.serverName);
     const [orderID, setOrderID] = useState(orderToEdit.orderID);
 
     const history = useHistory();
 
     const editOrder = async () => {
-        const editedOrder = { dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID), orderID:Number(orderID) };
+        const editedOrder = { dateTime, totalPrice:Number(totalPrice), serverName, orderID:Number(orderID) };
         const response = await fetch(`/orders/${orderToEdit._id}`, {
             method: 'PUT',
             body: JSON.stringify(editedOrder),
@@ -39,10 +40,9 @@ function EditOrderPage({ orderToEdit }) {
                 type="text"
                 value={totalPrice}
                 onChange={e => setTotalPrice(e.target.value)} />
-            <input
-                type="text"
-                value={serverID}
-                onChange={e => setServerID(e.target.value)} />
+            <select name="serverName" onChange={e => setServerName(e.target.value)} value={serverName}>
+                {servers.map((server, i) => <ServerName server={server} key={i} />)}
+            </select>
             <button
                 onClick={editOrder}
             >Save</button>

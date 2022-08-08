@@ -2,16 +2,17 @@
 
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import ServerName from '../components/ServerName';
 
-function CreateOrderPage() {
+function CreateOrderPage({ servers }) {
     const [dateTime, setDateTime] = useState('');
     const [totalPrice, setTotalPrice] = useState('');
-    const [serverID, setServerID] = useState('');
+    const [serverName, setServerName] = useState('');
 
     const history = useHistory();
 
     const addOrder = async () => {
-        const newOrder = { dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID) };
+        const newOrder = { dateTime, totalPrice:Number(totalPrice), serverName };
         const response = await fetch('/orders', {
             method: 'POST',
             body: JSON.stringify(newOrder),
@@ -40,11 +41,9 @@ function CreateOrderPage() {
                 placeholder="Enter totalPrice here"
                 value={totalPrice}
                 onChange={e => setTotalPrice(e.target.value)} />
-            <input
-                type="text"
-                placeholder="Enter serverID here"
-                value={serverID}
-                onChange={e => setServerID(e.target.value)} />
+            <select name="serverName" onChange={e => setServerName(e.target.value)} value={serverName}>
+                {servers.map((server, i) => <ServerName server={server} key={i} />)}
+            </select>
             <button
                 onClick={addOrder}
             >Add</button>

@@ -36,7 +36,8 @@ app.use(express.json());
 //  * Retrieve all orders
 //  */
 app.get('/orders', (req, res) => {
-    let query1 = "SELECT * FROM Orders;";
+    let query1 = `SELECT orderID, dateTime, totalPrice, serverName FROM Orders
+    JOIN Servers ON Orders.serverID = Servers.serverID;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -47,14 +48,14 @@ app.get('/orders', (req, res) => {
 //  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
 //  */
 app.post('/orders', (req, res) => {
-    let query2 = `INSERT INTO Orders (dateTime, totalPrice, serverID) VALUES ('${req.body.dateTime}', ${req.body.totalPrice}, ${req.body.serverID});`;
+    let query2 = `INSERT INTO Orders (dateTime, totalPrice, serverID) VALUES ('${req.body.dateTime}', ${req.body.totalPrice}, (SELECT serverID FROM Servers WHERE serverName = '${req.body.serverName}'));`;
     pool.query(query2, (error, row, fields) => {
         res.status(201).json(row);
     })
 });
 
 app.put('/orders/:_id', (req, res) => {
-    let query3 = `UPDATE Orders SET dateTime = '${req.body.dateTime}', totalPrice = ${req.body.totalPrice}, serverID = ${req.body.serverID} WHERE orderID = ${req.body.orderID};`;
+    let query3 = `UPDATE Orders SET dateTime = '${req.body.dateTime}', totalPrice = ${req.body.totalPrice}, serverID = (SELECT serverID FROM Servers WHERE serverName = '${req.body.serverName}') WHERE orderID = ${req.body.orderID};`;
     pool.query(query3, (error, row, fields) => {
         res.send();
     })
