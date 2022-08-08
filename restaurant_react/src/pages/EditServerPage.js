@@ -44,10 +44,10 @@ function EditServerPage({ serverToEdit }) {
                 type="number"
                 value={wagePerHour}
                 onChange={e => setWagePerHour(e.target.value)} />
-            <input
-                type="number"
-                value={isFullTime}
-                onChange={e => setIsFullTime(e.target.value)} />
+            <select name="isFullTime" onChange={e => setIsFullTime(e.target.value)} value={isFullTime}>
+                <option value={0}>No</option>
+                <option value={1}>Yes</option>
+            </select>
             <button
                 onClick={editServer}
             >Save</button>

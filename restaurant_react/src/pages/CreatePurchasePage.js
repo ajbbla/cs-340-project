@@ -16,29 +16,35 @@ function CreatePurchasePage({ suppliers, ingredients }) {
     const history = useHistory();
 
     const addPurchase = async () => {
-        const newPurchase = { supplierName, ingredientName, costPerGram:Number(costPerGram), gramQtyPurchased:Number(gramQtyPurchased), purchaseDate, actualShelfLifeDays:Number(actualShelfLifeDays) };
-        const response = await fetch('/purchases', {
-            method: 'POST',
-            body: JSON.stringify(newPurchase),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if(response.status === 201){
-            alert("Successfully added the purchase!");
+        if (!supplierName || !ingredientName) {
+            alert("Please select both a supplierName and an ingredientName");
         } else {
-            alert(`Failed to add purchase, status code = ${response.status}`);
+            const newPurchase = { supplierName, ingredientName, costPerGram:Number(costPerGram), gramQtyPurchased:Number(gramQtyPurchased), purchaseDate, actualShelfLifeDays:Number(actualShelfLifeDays) };
+            const response = await fetch('/purchases', {
+                method: 'POST',
+                body: JSON.stringify(newPurchase),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if(response.status === 201){
+                alert("Successfully added the purchase!");
+            } else {
+                alert(`Failed to add purchase, status code = ${response.status}`);
+            }
+            history.push("/view-purchases");
         }
-        history.push("/view-purchases");
     };
 
     return (
         <div>
             <h1>Add Purchase</h1>
             <select name="supplierName" onChange={e => setSupplierName(e.target.value)} value={supplierName}>
+                <option value={null}>-Select-</option>
                 {suppliers.map((supplier, i) => <SupplierName supplier={supplier} key={i} />)}
             </select>
             <select name="ingredientName" onChange={e => setIngredientName(e.target.value)} value={ingredientName}>
+                <option value={null}>-Select-</option>
                 {ingredients.map((ingredient, i) => <IngredientName ingredient={ingredient} key={i} />)}
             </select>
             <input

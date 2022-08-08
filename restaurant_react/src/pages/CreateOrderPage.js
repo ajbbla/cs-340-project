@@ -42,7 +42,6 @@ function CreateOrderPage({ servers }) {
                 value={totalPrice}
                 onChange={e => setTotalPrice(e.target.value)} />
             <select name="serverName" onChange={e => setServerName(e.target.value)} value={serverName}>
-                <option >-Select Server-</option>
                 <option value={'NULL'}>None</option>
                 {servers.map((server, i) => <ServerName server={server} key={i} />)}
             </select>

@@ -46,11 +46,10 @@ function CreateServerPage() {
                 placeholder="Enter wagePerHour here"
                 value={wagePerHour}
                 onChange={e => setWagePerHour(e.target.value)} />
-            <input
-                type="number"
-                placeholder="Enter isFullTime here"
-                value={isFullTime}
-                onChange={e => setIsFullTime(e.target.value)} />
+            <select name="isFullTime" onChange={e => setIsFullTime(e.target.value)} value={isFullTime}>
+                <option value={0}>No</option>
+                <option value={1}>Yes</option>
+            </select>
             <button
                 onClick={addServer}
             >Add</button>
