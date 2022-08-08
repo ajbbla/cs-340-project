@@ -19,6 +19,15 @@ import EditIngredientPage from './pages/EditIngredientPage';
 import ViewDishIngredientsPage from './pages/ViewDishIngredientsPage';
 import CreateDishIngredientPage from './pages/CreateDishIngredientPage';
 import EditDishIngredientPage from './pages/EditDishIngredientPage';
+import ViewSuppliersPage from './pages/ViewSuppliersPage';
+import CreateSupplierPage from './pages/CreateSupplierPage';
+import EditSupplierPage from './pages/EditSupplierPage';
+import ViewPurchasesPage from './pages/ViewPurchasesPage';
+import CreatePurchasePage from './pages/CreatePurchasePage';
+import EditPurchasePage from './pages/EditPurchasePage';
+import ViewServersPage from './pages/ViewServersPage';
+import CreateServerPage from './pages/CreateServerPage';
+import EditServerPage from './pages/EditServerPage';
 import Navigation from './components/Navigation';
 import { useState, useEffect } from 'react';
 
@@ -28,10 +37,15 @@ function App() {
   const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
   const [dishIngredientToEdit, setDishIngredientToEdit] = useState();
+  const [supplierToEdit, setSupplierToEdit] = useState();
+  const [purchaseToEdit, setPurchaseToEdit] = useState();
+  const [serverToEdit, setServerToEdit] = useState();
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
+  const [servers, setServers] = useState([]);
 
   const loadOrders = async () => {
     const response = await fetch('/orders');
@@ -44,7 +58,7 @@ function App() {
     const response = await fetch('/dishes');
     const dishes = await response.json();
     setDishes(dishes);
-}
+  }
 
   const loadIngredients = async () => {
       const response = await fetch('/ingredients');
@@ -125,6 +139,36 @@ function App() {
           </Route>
           <Route path="/edit-dishIngredient">
             <EditDishIngredientPage dishIngredientToEdit={dishIngredientToEdit} dishes={dishes} ingredients={ingredients} />
+
+          <Route path="/view-suppliers">
+            <ViewSuppliersPage setSupplierToEdit={setSupplierToEdit} suppliers={suppliers} setSuppliers={setSuppliers} />
+          </Route>
+          <Route path="/add-supplier">
+            <CreateSupplierPage />
+          </Route>
+          <Route path="/edit-supplier">
+            <EditSupplierPage supplierToEdit={supplierToEdit} />
+          </Route>
+
+          <Route path="/view-purchases">
+            <ViewPurchasesPage setPurchaseToEdit={setPurchaseToEdit} />
+          </Route>
+          <Route path="/add-purchase">
+            <CreatePurchasePage suppliers={suppliers} ingredients={ingredients} />
+          </Route>
+          <Route path="/edit-purchase">
+            <EditPurchasePage purchaseToEdit={purchaseToEdit} suppliers={suppliers} ingredients={ingredients} />
+          </Route>
+
+          <Route path="/view-servers">
+            <ViewServersPage setServerToEdit={setServerToEdit} servers={servers} setServers={setServers} />
+          </Route>
+          <Route path="/add-server">
+            <CreateServerPage />
+          </Route>
+          <Route path="/edit-server">
+            <EditServerPage serverToEdit={serverToEdit} />
+
           </Route>
         </div>
       </Router>

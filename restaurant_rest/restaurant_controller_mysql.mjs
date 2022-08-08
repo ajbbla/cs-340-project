@@ -9,22 +9,22 @@ import mysql from 'mysql';
 // import * as r_model from './restaurant_model_mysql.mjs';
 
 // Create a 'connection pool' using the provided credentials
-// var pool = mysql.createPool({
-//     connectionLimit : 10,
-//     host            : 'classmysql.engr.oregonstate.edu',
-//     user            : 'cs340_blantona',
-//     password        : '4032',
-//     database        : 'cs340_blantona'
-// })
-
-// Create a 'connection pool' using the provided credentials
 var pool = mysql.createPool({
-    connectionLimit : 10,   
-    host            : 'localhost',
-    user            : 'root',
-    password        : 'dV&SX#Gq@DQZ*m2&8XRh',
-    database        : 'restaurant'
+    connectionLimit : 10,
+    host            : 'classmysql.engr.oregonstate.edu',
+    user            : 'cs340_blantona',
+    password        : '4032',
+    database        : 'cs340_blantona'
 })
+
+// // Create a 'connection pool' using the provided credentials
+// var pool = mysql.createPool({
+//     connectionLimit : 10,   
+//     host            : 'localhost',
+//     user            : 'root',
+//     password        : 'dV&SX#Gq@DQZ*m2&8XRh',
+//     database        : 'restaurant'
+// })
 
 const PORT = process.env.PORT;
 
@@ -140,7 +140,6 @@ app.delete('/ingredients/:_id', (req, res) => {
     })
 });
 
-
 // // /**
 // //  * Retrieve all orderDishes
 // //  */
@@ -206,8 +205,111 @@ app.get('/dishIngredients', (req, res) => {
     })
 });
 
+//  * Retrieve all servers
+//  */
+app.get('/servers', (req, res) => {
+    let query1 = "SELECT * FROM Servers;";
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
 app.post('/dishIngredients', (req, res) => {
     let query2 = `INSERT INTO DishIngredients (dishID, ingredientID, gramQty, isRaw) VALUES ((SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), ${req.body.gramQty}, ${req.body.isRaw});`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+// /**
+//  * Create a new server with the dateTime, totalPrice, serverID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
+//  */
+app.post('/servers', (req, res) => {
+    let query2 = `INSERT INTO Servers (serverName, hireDate, wagePerHour, isFullTime) VALUES ('${req.body.serverName}', '${req.body.hireDate}', ${req.body.wagePerHour}, ${req.body.isFullTime});`;
+    console.log(query2);
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/servers/:_id', (req, res) => {
+    let query3 = `UPDATE Servers SET serverName = '${req.body.serverName}', hireDate = '${req.body.hireDate}', wagePerHour = ${req.body.wagePerHour}, isFullTime = ${req.body.isFullTime} WHERE serverID = ${req.body.serverID};`;
+    console.log(query3);
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/servers/:_id', (req, res) => {
+    let query4 = `DELETE FROM Servers WHERE serverID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
+// /**
+//  * Retrieve all suppliers
+//  */
+app.get('/suppliers', (req, res) => {
+    let query1 = "SELECT * FROM Suppliers;";
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new supplier with the dateTime, totalPrice, supplierID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), supplierID:Number(supplierID)
+//  */
+app.post('/suppliers', (req, res) => {
+    let query2 = `INSERT INTO Suppliers (supplierName, city, state, streetAddress, contactName, contactPhone, contactEmail) VALUES ('${req.body.supplierName}', '${req.body.city}', '${req.body.state}', '${req.body.streetAddress}', '${req.body.contactName}', '${req.body.contactPhone}', '${req.body.contactEmail}');`;
+    console.log(query2);
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/suppliers/:_id', (req, res) => {
+    let query3 = `UPDATE Suppliers SET supplierName = '${req.body.supplierName}', city = '${req.body.city}', state = '${req.body.state}', streetAddress = '${req.body.streetAddress}', contactName = '${req.body.contactName}', contactPhone = '${req.body.contactPhone}', contactEmail = '${req.body.contactEmail}' WHERE supplierID = ${req.body.supplierID};`;
+    console.log(query3);
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/suppliers/:_id', (req, res) => {
+    let query4 = `DELETE FROM Suppliers WHERE supplierID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
+// /**
+//  * Retrieve all purchases
+//  */
+app.get('/purchases', (req, res) => {
+    let query1 = `SELECT purchaseID, Suppliers.supplierName, Ingredients.ingredientName, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays FROM Purchases
+    JOIN Suppliers ON Purchases.supplierID = Suppliers.supplierID
+    JOIN Ingredients ON Purchases.ingredientID = Ingredients.ingredientID;`;
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
+//  * Create a new purchase with the dateTime, totalPrice, serverID provided in the body
+//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
+//  */
+// app.post('/purchases', (req, res) => {
+//     let query2 = `INSERT INTO Purchases (orderID, dishID, quantity) VALUES (${req.body.orderID}, ${req.body.dishID}, ${req.body.quantity});`;
+//     pool.query(query2, (error, row, fields) => {
+//         res.status(201).json(row);
+//     })
+// });
+
+app.post('/purchases', (req, res) => {
+    let query2 = `INSERT INTO Purchases (supplierID, ingredientID, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays) VALUES ((SELECT supplierID FROM Suppliers WHERE supplierName = '${req.body.supplierName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientID}'), ${req.body.costPerGram}, ${req.body.gramQtyPurchased}, '${req.body.purchaseDate}', ${req.body.actualShelfLifeDays});`;
     pool.query(query2, (error, row, fields) => {
         res.status(201).json(row);
     })
@@ -220,6 +322,13 @@ app.put('/dishIngredients/:_id', (req, res) => {
     })
 });
 
+app.put('/purchases/:_id', (req, res) => {
+    let query3 = `UPDATE Purchases SET supplierID = (SELECT supplierID FROM Suppliers WHERE supplierName = '${req.body.supplierName}'), ingredientID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), costPerGram = ${req.body.costPerGram}, gramQtyPurchased = ${req.body.gramQtyPurchased}, purchaseDate = '${req.body.purchaseDate}', actualShelfLifeDays = ${req.body.actualShelfLifeDays} WHERE purchaseID = ${req.body.purchaseID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
 app.delete('/dishIngredients/:_id', (req, res) => {
     let query4 = `DELETE FROM DishIngredients WHERE dishIngredientID = ${req.params._id};`;
     pool.query(query4, (error, row, fields) => {
@@ -227,6 +336,13 @@ app.delete('/dishIngredients/:_id', (req, res) => {
     })
 });
 
+app.delete('/purchases/:_id', (req, res) => {
+    let query4 = `DELETE FROM Purchases WHERE purchaseID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}...`);
+    console.log(`supplier listening on port ${PORT}...`);
 });
