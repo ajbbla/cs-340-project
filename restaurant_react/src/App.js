@@ -127,7 +127,7 @@ const loadServers = async () => {
           </Route>
 
           <Route path="/view-dishes">
-            <ViewDishesPage setDishToEdit={setDishToEdit} dishes={dishes} setDishes={setDishes} loadDishes={loadDishes} />
+            <ViewDishesPage setDishToEdit={setDishToEdit} dishes={dishes} setDishes={setDishes} loadDishes={loadDishes} ingredients={ingredients} />
           </Route>
           <Route path="/add-dish">
             <CreateDishPage />
