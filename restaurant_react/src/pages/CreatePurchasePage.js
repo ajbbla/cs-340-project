@@ -59,7 +59,7 @@ function CreatePurchasePage({ suppliers, ingredients }) {
             <input
                 type="number"
                 placeholder="Enter actualShelfLifeDays here"
-                value={costPerGram}
+                value={actualShelfLifeDays}
                 onChange={e => setActualShelfLifeDays(e.target.value)} />
             <button
                 onClick={addPurchase}
