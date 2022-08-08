@@ -272,7 +272,7 @@ app.delete('/suppliers/:_id', (req, res) => {
 //  * Retrieve all purchases
 //  */
 app.get('/purchases', (req, res) => {
-    let query1 = `SELECT purchaseID, supplierID, ingredientID, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays FROM Purchases
+    let query1 = `SELECT purchaseID, Suppliers.supplierName, Ingredients.ingredientName, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays FROM Purchases
     JOIN Suppliers ON Purchases.supplierID = Suppliers.supplierID
     JOIN Ingredients ON Purchases.ingredientID = Ingredients.ingredientID;`;
     pool.query(query1, (error, rows, fields) => {

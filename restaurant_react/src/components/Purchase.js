@@ -7,8 +7,8 @@ function Purchase({ purchase, onDelete, onEdit }) {
     return (
         <tr>
             <td>{purchase.purchaseID}</td>
-            <td>{purchase.supplierID}</td>
-            <td>{purchase.ingredientID}</td>
+            <td>{purchase.supplierName}</td>
+            <td>{purchase.ingredientName}</td>
             <td>{purchase.costPerGram}</td>
             <td>{purchase.gramQtyPurchased}</td>
             <td>{purchase.purchaseDate}</td>

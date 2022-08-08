@@ -19,6 +19,9 @@ import EditIngredientPage from './pages/EditIngredientPage';
 import ViewSuppliersPage from './pages/ViewSuppliersPage';
 import CreateSupplierPage from './pages/CreateSupplierPage';
 import EditSupplierPage from './pages/EditSupplierPage';
+import ViewPurchasesPage from './pages/ViewPurchasesPage';
+import CreatePurchasePage from './pages/CreatePurchasePage';
+import EditPurchasePage from './pages/EditPurchasePage';
 import ViewServersPage from './pages/ViewServersPage';
 import CreateServerPage from './pages/CreateServerPage';
 import EditServerPage from './pages/EditServerPage';
@@ -36,6 +39,7 @@ function App() {
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [servers, setServers] = useState([]);
 

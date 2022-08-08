@@ -9,8 +9,8 @@ function PurchaseList({ purchases, onDelete, onEdit }) {
             <thead>
                 <tr>
                     <th>purchaseID</th>
-                    <th>supplierID</th>
-                    <th>ingredientID</th>
+                    <th>supplierName</th>
+                    <th>ingredientName</th>
                     <th>costPerGram</th>
                     <th>gramQtyPurchased</th>
                     <th>purchaseDate</th>
