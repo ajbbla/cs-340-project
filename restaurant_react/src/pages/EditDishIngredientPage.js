@@ -36,11 +36,9 @@ function EditDishIngredientPage({ dishIngredientToEdit, dishes, ingredients }) {
         <div>
             <h1>Edit DishIngredient</h1>
             <select name="dishName" onChange={e => setDishName(e.target.value)} value={dishName}>
-                <option value={null}>-Select-</option>
                 {dishes.map((dish, i) => <DishName dish={dish} key={i} />)}
             </select>
             <select name="ingredientName" onChange={e => setIngredientName(e.target.value)} value={ingredientName}>
-                <option value={null}>-Select-</option>
                 {ingredients.map((ingredient, i) => <IngredientName ingredient={ingredient} key={i} />)}
             </select>
             <input
