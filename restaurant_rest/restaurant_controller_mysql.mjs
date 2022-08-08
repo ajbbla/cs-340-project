@@ -9,22 +9,22 @@ import mysql from 'mysql';
 // import * as r_model from './restaurant_model_mysql.mjs';
 
 // Create a 'connection pool' using the provided credentials
-// var pool = mysql.createPool({
-//     connectionLimit : 10,
-//     host            : 'classmysql.engr.oregonstate.edu',
-//     user            : 'cs340_blantona',
-//     password        : '4032',
-//     database        : 'cs340_blantona'
-// })
+var pool = mysql.createPool({
+    connectionLimit : 10,
+    host            : 'classmysql.engr.oregonstate.edu',
+    user            : 'cs340_blantona',
+    password        : '4032',
+    database        : 'cs340_blantona'
+})
 
 // Create a 'connection pool' using the provided credentials
-var pool = mysql.createPool({
-    connectionLimit : 10,   
-    host            : 'localhost',
-    user            : 'root',
-    password        : 'dV&SX#Gq@DQZ*m2&8XRh',
-    database        : 'restaurant'
-})
+// var pool = mysql.createPool({
+//     connectionLimit : 10,   
+//     host            : 'localhost',
+//     user            : 'root',
+//     password        : 'dV&SX#Gq@DQZ*m2&8XRh',
+//     database        : 'restaurant'
+// })
 
 const PORT = process.env.PORT;
 

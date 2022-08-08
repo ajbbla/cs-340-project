@@ -12,29 +12,35 @@ function CreateIngredientSubstitutePage({ ingredients, substitutes }) {
     const history = useHistory();
 
     const addIngredientSubstitute = async () => {
-        const newIngredientSubstitute = { ingredientName, substituteName };
-        const response = await fetch('/ingredientSubstitutes', {
-            method: 'POST',
-            body: JSON.stringify(newIngredientSubstitute),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if(response.status === 201){
-            alert("Successfully added the ingredientSubstitute!");
+        if (!ingredientName || !substituteName) {
+            alert("Please select both an ingredientName and a substituteName");
         } else {
-            alert(`Failed to add ingredientSubstitute, status code = ${response.status}`);
+            const newIngredientSubstitute = { ingredientName, substituteName };
+            const response = await fetch('/ingredientSubstitutes', {
+                method: 'POST',
+                body: JSON.stringify(newIngredientSubstitute),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if(response.status === 201){
+                alert("Successfully added the ingredientSubstitute!");
+            } else {
+                alert(`Failed to add ingredientSubstitute, status code = ${response.status}`);
+            }
+            history.push("/view-ingredientSubstitutes");
         }
-        history.push("/view-ingredientSubstitutes");
     };
 
     return (
         <div>
             <h1>Add IngredientSubstitute</h1>
             <select name="ingredientName" onChange={e => setIngredientName(e.target.value)} value={ingredientName}>
+                <option value={null}>-Select-</option>
                 {ingredients.map((ingredient, i) => <IngredientName ingredient={ingredient} key={i} />)}
             </select>
             <select name="substituteName" onChange={e => setSubstituteName(e.target.value)} value={substituteName}>
+                <option value={null}>-Select-</option>
                 {substitutes.map((substitute, i) => <SubstituteName substitute={substitute} key={i} />)}
             </select>
             <button
