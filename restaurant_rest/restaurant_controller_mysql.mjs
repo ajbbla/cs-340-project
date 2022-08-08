@@ -194,6 +194,39 @@ app.delete('/orderDishes/:_id', (req, res) => {
     })
 });
 
+// /**
+//  * Retrieve all dishIngredients
+//  */
+app.get('/dishIngredients', (req, res) => {
+    let query1 = `SELECT dishIngredientID, dishName, ingredientName, gramQty, isRaw FROM DishIngredients
+    JOIN Dishes ON DishIngredients.dishID = Dishes.dishID
+    JOIN Ingredients ON DishIngredients.ingredientID = Ingredients.ingredientID;`;
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+app.post('/dishIngredients', (req, res) => {
+    let query2 = `INSERT INTO DishIngredients (dishID, ingredientID, gramQty, isRaw) VALUES ((SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), ${req.body.gramQty}, ${req.body.isRaw});`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/dishIngredients/:_id', (req, res) => {
+    let query3 = `UPDATE DishIngredients SET dishID = (SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), ingredientID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), gramQty = ${req.body.gramQty}, isRaw = ${req.body.isRaw} WHERE dishIngredientID = ${req.body.dishIngredientID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/dishIngredients/:_id', (req, res) => {
+    let query4 = `DELETE FROM DishIngredients WHERE dishIngredientID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
 });
