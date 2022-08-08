@@ -11,7 +11,7 @@ function OrderList({ orders, onDelete, onEdit }) {
                     <th>orderID</th>
                     <th>dateTime</th>
                     <th>totalPrice</th>
-                    <th>serverID</th>
+                    <th>serverName</th>
                 </tr>
             </thead>
             <tbody>

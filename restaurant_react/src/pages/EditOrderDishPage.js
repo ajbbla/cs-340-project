@@ -9,11 +9,8 @@ import DishName from '../components/DishName';
 function EditOrderDishPage({ orderDishToEdit, orders, dishes }) {
     const [orderDishID, setOrderDishID] = useState(orderDishToEdit.orderDishID);
     const [orderID, setOrderID] = useState(orderDishToEdit.orderID);
-    // const [dishID, setDishID] = useState(orderDishToEdit.dishID);
     const [quantity, setQuantity] = useState(orderDishToEdit.quantity);
-
-    // const [dishName, setDishName] = useState(orderDishToEdit.dishID);
-    const [dishName, setDishName] = useState('')
+    const [dishName, setDishName] = useState(orderDishToEdit.dishName)
 
     const history = useHistory();
 
