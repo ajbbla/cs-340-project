@@ -5,15 +5,8 @@ import SupplierList from '../components/SupplierList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewSuppliersPage({ setSupplierToEdit, suppliers, setSuppliers }) {
-    // const [suppliers, setSuppliers] = useState([]);
+function ViewSuppliersPage({ setSupplierToEdit, suppliers, setSuppliers, loadSuppliers }) {
     const history = useHistory();
-
-    const loadSuppliers = async () => {
-        const response = await fetch('/suppliers');
-        const suppliers = await response.json();
-        setSuppliers(suppliers);
-    }
 
     useEffect(() => {
         loadSuppliers();

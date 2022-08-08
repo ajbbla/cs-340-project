@@ -8,6 +8,10 @@ import { useHistory } from 'react-router-dom';
 function ViewDishesPage({ setDishToEdit, dishes, setDishes, loadDishes }) {
     const history = useHistory();
 
+    useEffect(() => {
+        loadDishes();
+    }, []);
+
     const onDelete = async _id => {
         const response = await fetch(`/dishes/${_id}`, { method: 'DELETE' });
         if (response.status === 204) {

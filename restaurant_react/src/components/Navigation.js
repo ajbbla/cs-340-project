@@ -32,6 +32,7 @@ function Navigation() {
             <Link to="/view-dishIngredients">Go to View DishIngredients Page</Link>
             <br></br>
             <Link to="/add-dishIngredient">Go to Create DishIngredient Page</Link>
+            <br></br>
 
             <Link to="/view-suppliers">Go to View Suppliers Page</Link>
             <br></br>

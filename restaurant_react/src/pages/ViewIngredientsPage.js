@@ -8,9 +8,9 @@ import { useHistory } from 'react-router-dom';
 function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients, loadIngredients }) {
     const history = useHistory();
 
-    // useEffect(() => {
-    //     loadIngredients();
-    // }, []);
+    useEffect(() => {
+        loadIngredients();
+    }, []);
 
     const onDelete = async _id => {
         const response = await fetch(`/ingredients/${_id}`, { method: 'DELETE' });
