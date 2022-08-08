@@ -42,6 +42,7 @@ function EditOrderPage({ orderToEdit, servers }) {
                 onChange={e => setTotalPrice(e.target.value)} />
             <select name="serverName" onChange={e => setServerName(e.target.value)} value={serverName}>
                 {servers.map((server, i) => <ServerName server={server} key={i} />)}
+                <option value={'NULL'}>None</option>
             </select>
             <button
                 onClick={editOrder}
