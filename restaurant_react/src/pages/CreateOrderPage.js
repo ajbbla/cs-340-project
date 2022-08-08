@@ -7,7 +7,7 @@ import ServerName from '../components/ServerName';
 function CreateOrderPage({ servers }) {
     const [dateTime, setDateTime] = useState('');
     const [totalPrice, setTotalPrice] = useState('');
-    const [serverName, setServerName] = useState('');
+    const [serverName, setServerName] = useState(servers.serverName);
 
     const history = useHistory();
 
@@ -32,7 +32,7 @@ function CreateOrderPage({ servers }) {
         <div>
             <h1>Add Order</h1>
             <input
-                type="datetime-local"
+                type="text"
                 placeholder="Enter dateTime here"
                 value={dateTime}
                 onChange={e => setDateTime(e.target.value)} />
@@ -42,8 +42,9 @@ function CreateOrderPage({ servers }) {
                 value={totalPrice}
                 onChange={e => setTotalPrice(e.target.value)} />
             <select name="serverName" onChange={e => setServerName(e.target.value)} value={serverName}>
-                {servers.map((server, i) => <ServerName server={server} key={i} />)}
+                <option >-Select Server-</option>
                 <option value={'NULL'}>None</option>
+                {servers.map((server, i) => <ServerName server={server} key={i} />)}
             </select>
             <button
                 onClick={addOrder}
