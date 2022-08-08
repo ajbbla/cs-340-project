@@ -79,6 +79,19 @@ app.get('/dishes', (req, res) => {
 });
 
 // /**
+//  * Filter dishes by ingredient
+//  */
+app.get('/dishesByIngredient/:ingredientName', (req, res) => {
+    let query1 = `SELECT Dishes.dishID, dishName, price, Dishes.spiceLevel, currentMenu, stockLevel FROM Dishes
+    JOIN DishIngredients ON Dishes.dishID = DishIngredients.dishID
+    JOIN Ingredients ON DishIngredients.ingredientID = Ingredients.ingredientID
+    WHERE ingredientName = '${req.params.ingredientName}';`;
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+// /**
 //  * Create a new dish with the dateTime, totalPrice, serverID provided in the body
 //  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
 //  */
