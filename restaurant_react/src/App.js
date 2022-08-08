@@ -45,7 +45,6 @@ function App() {
   const [dishes, setDishes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
-  const [servers, setServers] = useState([]);
 
   const loadOrders = async () => {
     const response = await fetch('/orders');
@@ -66,10 +65,17 @@ function App() {
       setIngredients(ingredients);
   }
 
+  const loadSuppliers = async () => {
+    const response = await fetch('/suppliers');
+    const suppliers = await response.json();
+    setSuppliers(suppliers);
+}
+
   useEffect(() => {
       loadOrders();
       loadDishes();
       loadIngredients();
+      loadSuppliers();
   }, []);
 
   return (
@@ -139,9 +145,10 @@ function App() {
           </Route>
           <Route path="/edit-dishIngredient">
             <EditDishIngredientPage dishIngredientToEdit={dishIngredientToEdit} dishes={dishes} ingredients={ingredients} />
+          </Route>
 
           <Route path="/view-suppliers">
-            <ViewSuppliersPage setSupplierToEdit={setSupplierToEdit} suppliers={suppliers} setSuppliers={setSuppliers} />
+            <ViewSuppliersPage setSupplierToEdit={setSupplierToEdit} suppliers={suppliers} setSuppliers={setSuppliers} loadSuppliers={loadSuppliers} />
           </Route>
           <Route path="/add-supplier">
             <CreateSupplierPage />
@@ -161,14 +168,13 @@ function App() {
           </Route>
 
           <Route path="/view-servers">
-            <ViewServersPage setServerToEdit={setServerToEdit} servers={servers} setServers={setServers} />
+            <ViewServersPage setServerToEdit={setServerToEdit} />
           </Route>
           <Route path="/add-server">
             <CreateServerPage />
           </Route>
           <Route path="/edit-server">
             <EditServerPage serverToEdit={serverToEdit} />
-
           </Route>
         </div>
       </Router>

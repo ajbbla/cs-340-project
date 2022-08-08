@@ -8,6 +8,10 @@ import { useHistory } from 'react-router-dom';
 function ViewOrdersPage({ setOrderToEdit, orders, setOrders, loadOrders }) {
     const history = useHistory();
 
+    useEffect(() => {
+        loadOrders();
+    }, []);
+
     const onDelete = async _id => {
         const response = await fetch(`/orders/${_id}`, { method: 'DELETE' });
         if (response.status === 204) {
