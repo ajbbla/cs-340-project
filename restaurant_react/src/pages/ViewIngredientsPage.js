@@ -5,11 +5,12 @@ import IngredientList from '../components/IngredientList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients, loadIngredients }) {
+function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients, loadIngredients, loadSubstitutes }) {
     const history = useHistory();
 
     useEffect(() => {
         loadIngredients();
+        loadSubstitutes();
     }, []);
 
     const onDelete = async _id => {
@@ -17,6 +18,7 @@ function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients,
         if (response.status === 204) {
             setIngredients(ingredients.filter(e => e._id !== _id));
             loadIngredients();
+            loadSubstitutes();
         } else {
             console.error(`Failed to delete ingredient with id = ${_id}, status code = ${response.status}`)
         } 

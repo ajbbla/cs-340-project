@@ -28,6 +28,9 @@ import EditPurchasePage from './pages/EditPurchasePage';
 import ViewServersPage from './pages/ViewServersPage';
 import CreateServerPage from './pages/CreateServerPage';
 import EditServerPage from './pages/EditServerPage';
+import ViewIngredientSubstitutesPage from './pages/ViewIngredientSubstitutesPage';
+import CreateIngredientSubstitutePage from './pages/CreateIngredientSubstitutePage';
+import EditIngredientSubstitutePage from './pages/EditIngredientSubstitutePage';
 import Navigation from './components/Navigation';
 import { useState, useEffect } from 'react';
 
@@ -40,11 +43,13 @@ function App() {
   const [supplierToEdit, setSupplierToEdit] = useState();
   const [purchaseToEdit, setPurchaseToEdit] = useState();
   const [serverToEdit, setServerToEdit] = useState();
+  const [ingredientSubstituteToEdit, setIngredientSubstituteToEdit] = useState();
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
+  const [substitutes, setSubstitutes] = useState([]);
 
   const loadOrders = async () => {
     const response = await fetch('/orders');
@@ -65,6 +70,12 @@ function App() {
       setIngredients(ingredients);
   }
 
+  const loadSubstitutes = async () => {
+      const response = await fetch('/ingredients');
+      const substitutes = await response.json();
+      setSubstitutes(substitutes);
+  }
+
   const loadSuppliers = async () => {
     const response = await fetch('/suppliers');
     const suppliers = await response.json();
@@ -76,6 +87,7 @@ function App() {
       loadDishes();
       loadIngredients();
       loadSuppliers();
+      loadSubstitutes();
   }, []);
 
   return (
@@ -128,7 +140,7 @@ function App() {
           </Route>
 
          <Route path="/view-ingredients">
-            <ViewIngredientsPage setIngredientToEdit={setIngredientToEdit} ingredients={ingredients} setIngredients={setIngredients} loadIngredients={loadIngredients} />
+            <ViewIngredientsPage setIngredientToEdit={setIngredientToEdit} ingredients={ingredients} setIngredients={setIngredients} loadIngredients={loadIngredients} loadSubstitutes={loadSubstitutes} />
           </Route>
           <Route path="/add-ingredient">
             <CreateIngredientPage />
@@ -175,6 +187,16 @@ function App() {
           </Route>
           <Route path="/edit-server">
             <EditServerPage serverToEdit={serverToEdit} />
+          </Route>
+
+          <Route path="/view-ingredientSubstitutes">
+            <ViewIngredientSubstitutesPage setIngredientSubstituteToEdit={setIngredientSubstituteToEdit} />
+          </Route>
+          <Route path="/add-ingredientSubstitute">
+            <CreateIngredientSubstitutePage ingredients={ingredients} substitutes={substitutes} />
+          </Route>
+          <Route path="/edit-ingredientSubstitute">
+            <EditIngredientSubstitutePage ingredientSubstituteToEdit={ingredientSubstituteToEdit} ingredients={ingredients} substitutes={substitutes} />
           </Route>
         </div>
       </Router>

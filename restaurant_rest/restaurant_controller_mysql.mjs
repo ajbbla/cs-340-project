@@ -297,17 +297,6 @@ app.get('/purchases', (req, res) => {
     })
 });
 
-// /**
-//  * Create a new purchase with the dateTime, totalPrice, serverID provided in the body
-//  * dateTime, totalPrice:Number(totalPrice), serverID:Number(serverID)
-//  */
-// app.post('/purchases', (req, res) => {
-//     let query2 = `INSERT INTO Purchases (orderID, dishID, quantity) VALUES (${req.body.orderID}, ${req.body.dishID}, ${req.body.quantity});`;
-//     pool.query(query2, (error, row, fields) => {
-//         res.status(201).json(row);
-//     })
-// });
-
 app.post('/purchases', (req, res) => {
     let query2 = `INSERT INTO Purchases (supplierID, ingredientID, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays) VALUES ((SELECT supplierID FROM Suppliers WHERE supplierName = '${req.body.supplierName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientID}'), ${req.body.costPerGram}, ${req.body.gramQtyPurchased}, '${req.body.purchaseDate}', ${req.body.actualShelfLifeDays});`;
     pool.query(query2, (error, row, fields) => {
@@ -342,6 +331,51 @@ app.delete('/purchases/:_id', (req, res) => {
         res.status(204).send();
     })
 });
+
+
+
+// SELECT IngredientSubstitutes.ingredientSubstituteID, Ingredients.ingredientName AS ingredientName, Substitutes.ingredientName AS substituteName FROM IngredientSubstitutes
+// INNER JOIN Ingredients ON IngredientSubstitutes.ingredientID = Ingredients.ingredientID
+// INNER JOIN Ingredients AS Substitutes ON IngredientSubstitutes.substituteID = Substitutes.ingredientID;
+
+// -- Add an IngredientSubstitute
+// INSERT INTO IngredientSubstitutes (ingredientID, substituteID)
+// VALUES ((SELECT ingredientID FROM Ingredients WHERE ingredientName = :selectedIngredient), (SELECT ingredientID FROM Ingredients WHERE ingredientName = :selectedSubstitute));
+
+// /**
+//  * Retrieve all ingredientSubstitutes
+//  */
+app.get('/ingredientSubstitutes', (req, res) => {
+    let query1 = `SELECT ingredientSubstituteID, Ingredients.ingredientName AS ingredientName, Substitutes.ingredientName AS substituteName FROM IngredientSubstitutes
+    JOIN Ingredients ON IngredientSubstitutes.ingredientID = Ingredients.ingredientID
+    JOIN Ingredients AS Substitutes ON IngredientSubstitutes.substituteID = Substitutes.ingredientID;`;
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
+app.post('/ingredientSubstitutes', (req, res) => {
+    let query2 = `INSERT INTO IngredientSubstitutes (ingredientID, substituteID) VALUES ((SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.substituteName}'));`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
+    })
+});
+
+app.put('/ingredientSubstitutes/:_id', (req, res) => {
+    let query3 = `UPDATE IngredientSubstitutes SET ingredientID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), substituteID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.substituteName}') WHERE ingredientSubstituteID = ${req.body.ingredientSubstituteID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
+app.delete('/ingredientSubstitutes/:_id', (req, res) => {
+    let query4 = `DELETE FROM IngredientSubstitutes WHERE ingredientSubstituteID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
+    })
+});
+
+
 
 app.listen(PORT, () => {
     console.log(`supplier listening on port ${PORT}...`);
