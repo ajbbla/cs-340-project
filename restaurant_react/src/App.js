@@ -19,6 +19,9 @@ import EditIngredientPage from './pages/EditIngredientPage';
 import ViewSuppliersPage from './pages/ViewSuppliersPage';
 import CreateSupplierPage from './pages/CreateSupplierPage';
 import EditSupplierPage from './pages/EditSupplierPage';
+import ViewPurchasesPage from './pages/ViewPurchasesPage';
+import CreatePurchasePage from './pages/CreatePurchasePage';
+import EditPurchasePage from './pages/EditPurchasePage';
 import ViewServersPage from './pages/ViewServersPage';
 import CreateServerPage from './pages/CreateServerPage';
 import EditServerPage from './pages/EditServerPage';
@@ -31,10 +34,12 @@ function App() {
   const [orderDishToEdit, setOrderDishToEdit] = useState();
   const [ingredientToEdit, setIngredientToEdit] = useState();
   const [supplierToEdit, setSupplierToEdit] = useState();
+  const [purchaseToEdit, setPurchaseToEdit] = useState();
   const [serverToEdit, setServerToEdit] = useState();
 
   const [orders, setOrders] = useState([]);
   const [dishes, setDishes] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [servers, setServers] = useState([]);
 
@@ -124,6 +129,16 @@ function App() {
           </Route>
           <Route path="/edit-supplier">
             <EditSupplierPage supplierToEdit={supplierToEdit} />
+          </Route>
+
+          <Route path="/view-purchases">
+            <ViewPurchasesPage setPurchaseToEdit={setPurchaseToEdit} />
+          </Route>
+          <Route path="/add-purchase">
+            <CreatePurchasePage suppliers={suppliers} ingredients={ingredients} />
+          </Route>
+          <Route path="/edit-purchase">
+            <EditPurchasePage purchaseToEdit={purchaseToEdit} suppliers={suppliers} ingredients={ingredients} />
           </Route>
 
           <Route path="/view-servers">
