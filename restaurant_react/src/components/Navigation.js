@@ -48,6 +48,11 @@ function Navigation() {
             <br></br>
             <Link to="/add-server">Go to Create Server Page</Link>
             <br></br>
+
+            <Link to="/view-ingredientSubstitutes">Go to View IngredientSubstitutes Page</Link>
+            <br></br>
+            <Link to="/add-ingredientSubstitute">Go to Create IngredientSubstitute Page</Link>
+            <br></br>
         </nav>
     );
 }
