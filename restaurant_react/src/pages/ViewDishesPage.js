@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function ViewDishesPage({ setDishToEdit, dishes, setDishes, loadDishes }) {
-    // const [dishes, setDishes] = useState([]);
     const history = useHistory();
 
     const onDelete = async _id => {

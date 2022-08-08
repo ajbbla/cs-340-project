@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function ViewOrdersPage({ setOrderToEdit, orders, setOrders, loadOrders }) {
-    // const [orders, setOrders] = useState([]);
     const history = useHistory();
 
     const onDelete = async _id => {

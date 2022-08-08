@@ -5,20 +5,12 @@ import IngredientList from '../components/IngredientList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function ViewIngredientsPage({ setIngredientToEdit }) {
-    const [ingredients, setIngredients] = useState([]);
+function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients, loadIngredients }) {
     const history = useHistory();
 
-    const loadIngredients = async () => {
-        const response = await fetch('/ingredients');
-        const ingredients = await response.json();
-        // console.log(ingredients);
-        setIngredients(ingredients);
-    }
-
-    useEffect(() => {
-        loadIngredients();
-    }, []);
+    // useEffect(() => {
+    //     loadIngredients();
+    // }, []);
 
     const onDelete = async _id => {
         const response = await fetch(`/ingredients/${_id}`, { method: 'DELETE' });

@@ -140,7 +140,6 @@ app.delete('/ingredients/:_id', (req, res) => {
     })
 });
 
-
 // // /**
 // //  * Retrieve all orderDishes
 // //  */
@@ -195,12 +194,30 @@ app.delete('/orderDishes/:_id', (req, res) => {
 });
 
 // /**
+//  * Retrieve all dishIngredients
+//  */
+app.get('/dishIngredients', (req, res) => {
+    let query1 = `SELECT dishIngredientID, dishName, ingredientName, gramQty, isRaw FROM DishIngredients
+    JOIN Dishes ON DishIngredients.dishID = Dishes.dishID
+    JOIN Ingredients ON DishIngredients.ingredientID = Ingredients.ingredientID;`;
+    pool.query(query1, (error, rows, fields) => {
+        res.send(rows);
+    })
+});
+
 //  * Retrieve all servers
 //  */
 app.get('/servers', (req, res) => {
     let query1 = "SELECT * FROM Servers;";
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
+    })
+});
+
+app.post('/dishIngredients', (req, res) => {
+    let query2 = `INSERT INTO DishIngredients (dishID, ingredientID, gramQty, isRaw) VALUES ((SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), ${req.body.gramQty}, ${req.body.isRaw});`;
+    pool.query(query2, (error, row, fields) => {
+        res.status(201).json(row);
     })
 });
 
@@ -298,10 +315,24 @@ app.post('/purchases', (req, res) => {
     })
 });
 
+app.put('/dishIngredients/:_id', (req, res) => {
+    let query3 = `UPDATE DishIngredients SET dishID = (SELECT dishID FROM Dishes WHERE dishName = '${req.body.dishName}'), ingredientID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), gramQty = ${req.body.gramQty}, isRaw = ${req.body.isRaw} WHERE dishIngredientID = ${req.body.dishIngredientID};`;
+    pool.query(query3, (error, row, fields) => {
+        res.send();
+    })
+});
+
 app.put('/purchases/:_id', (req, res) => {
     let query3 = `UPDATE Purchases SET supplierID = (SELECT supplierID FROM Suppliers WHERE supplierName = '${req.body.supplierName}'), ingredientID = (SELECT ingredientID FROM Ingredients WHERE ingredientName = '${req.body.ingredientName}'), costPerGram = ${req.body.costPerGram}, gramQtyPurchased = ${req.body.gramQtyPurchased}, purchaseDate = '${req.body.purchaseDate}', actualShelfLifeDays = ${req.body.actualShelfLifeDays} WHERE purchaseID = ${req.body.purchaseID};`;
     pool.query(query3, (error, row, fields) => {
         res.send();
+    })
+});
+
+app.delete('/dishIngredients/:_id', (req, res) => {
+    let query4 = `DELETE FROM DishIngredients WHERE dishIngredientID = ${req.params._id};`;
+    pool.query(query4, (error, row, fields) => {
+        res.status(204).send();
     })
 });
 
