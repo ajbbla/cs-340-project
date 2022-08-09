@@ -4,6 +4,7 @@ import React from 'react';
 import OrderList from '../components/OrderList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewOrdersPage({ setOrderToEdit, orders, setOrders, loadOrders }) {
     const history = useHistory();
@@ -29,6 +30,8 @@ function ViewOrdersPage({ setOrderToEdit, orders, setOrders, loadOrders }) {
 
     return (
         <>
+            <Link to="/add-order">Go to Create Order Page</Link>
+            <br></br>
             <h2>List of Orders</h2>
             <OrderList orders={orders} onDelete={onDelete} onEdit={onEdit}></OrderList>
         </>

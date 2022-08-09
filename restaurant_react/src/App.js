@@ -97,17 +97,31 @@ const loadServers = async () => {
       loadServers();
   }, []);
 
+  const addOrderDish = async (orderID, dishName, quantity, history) => {
+    if (!orderID || !dishName) {
+        alert("Please select both an orderID and a dishName");
+    } else {
+        const newOrderDish = { orderID:Number(orderID), dishName, quantity:Number(quantity) };
+        const response = await fetch('/orderDishes', {
+            method: 'POST',
+            body: JSON.stringify(newOrderDish),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        // if(response.status === 201){
+        //     alert("Successfully added the orderDish!");
+        // } else {
+        //     alert(`Failed to add orderDish, status code = ${response.status}`);
+        // }
+        // history.push("/view-orderDishes");
+    }
+};
+
   return (
     <div className="App">
       <header>
-          <h1>For Each Page:</h1>
-          <h2>Below is an Entity: an Object, Event, or Category</h2>
-          <p>View the Entity Records in the table<br></br>
-            Use the Relevant "Create..." Link to Add a Records<br></br>
-            Click a "View..." Link to View a Different Entity<br></br>
-            Click the Edit Icon (Pen) next to a Record<br></br>
-            Click the Delete Icon (Trash) next to a Record
-          </p>
+          <h1>Waste Not: A Restaurant DB Admin Portal</h1>
       </header>
       <Router>
         <Navigation />
@@ -120,7 +134,7 @@ const loadServers = async () => {
             <ViewOrdersPage setOrderToEdit={setOrderToEdit} orders={orders} setOrders={setOrders} loadOrders={loadOrders} />
           </Route>
           <Route path="/add-order">
-            <CreateOrderPage servers={servers} />
+            <CreateOrderPage servers={servers} dishes={dishes} addOrderDish={addOrderDish} loadOrders={loadOrders} orders={orders} />
           </Route>
           <Route path="/edit-order">
             <EditOrderPage orderToEdit={orderToEdit} servers={servers} />

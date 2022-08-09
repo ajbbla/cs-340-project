@@ -5,9 +5,8 @@ import React from 'react';
 function HomePage({ setDishToEdit }) {
     return (
         <>
-            <h1>A database application to manage food waste at a restaurant</h1>
-            <p>This is an application to create, edit, and delete records of
-                ingredients, dishes, orders, suppliers, and servers.
+            <h2>A database application to manage food waste at a restaurant</h2>
+            <p>Create, View, Filter, Edit, and Delete records of ingredients, dishes, orders, suppliers, and servers, as well as their relationships.
             </p>
         </>
     );

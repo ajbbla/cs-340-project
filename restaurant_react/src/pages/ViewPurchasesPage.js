@@ -4,6 +4,7 @@ import React from 'react';
 import PurchaseList from '../components/PurchaseList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewPurchasesPage({ setPurchaseToEdit }) {
     const [purchases, setPurchases] = useState([]);
@@ -36,6 +37,8 @@ function ViewPurchasesPage({ setPurchaseToEdit }) {
 
     return (
         <>
+            <Link to="/add-purchase">Go to Create Purchase Page</Link>
+            <br></br>
             <h2>List of Purchases</h2>
             <PurchaseList purchases={purchases} onDelete={onDelete} onEdit={onEdit}></PurchaseList>
         </>
