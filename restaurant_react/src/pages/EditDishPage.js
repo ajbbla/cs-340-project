@@ -45,14 +45,15 @@ function EditDishPage({ dishToEdit }) {
                 type="text"
                 value={spiceLevel}
                 onChange={e => setSpiceLevel(e.target.value)} />
-            <input
-                type="text"
-                value={currentMenu}
-                onChange={e => setCurrentMenu(e.target.value)} />
-            <input
-                type="text"
-                value={stockLevel}
-                onChange={e => setStockLevel(e.target.value)} />
+            <select name="currentMenu" onChange={e => setCurrentMenu(e.target.value)} value={currentMenu}>
+                <option value={0}>No</option>
+                <option value={1}>Yes</option>
+            </select>
+            <select name="stockLevel" onChange={e => setStockLevel(e.target.value)} value={stockLevel}>
+                <option value='out_of_stock'>out of stock</option>
+                <option value='low_stock'>low stock</option>
+                <option value='in_stock'>in stock</option>
+            </select>
             <button
                 onClick={editDish}
             >Save</button>
