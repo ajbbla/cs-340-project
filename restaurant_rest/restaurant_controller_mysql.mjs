@@ -5,8 +5,6 @@ import 'dotenv/config';
 import express from 'express';
 // Get an instance of mysql we can use in the app
 import mysql from 'mysql';
-// import * as db from './database/db-connector.mjs';
-// import * as r_model from './restaurant_model_mysql.mjs';
 
 // Create a 'connection pool' using the provided credentials
 var pool = mysql.createPool({
