@@ -33,7 +33,7 @@ app.use(express.json());
 // Retrieve all Orders, displaying Servers.serverName instead of Orders.serverID
 app.get('/orders', (req, res) => {
     let query1 = `SELECT orderID, dateTime, totalPrice, serverName FROM Orders
-    LEFT JOIN Servers ON Orders.serverID = Servers.serverID;`;
+    LEFT JOIN Servers ON Orders.serverID = Servers.serverID ORDER BY dateTime DESC;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -75,7 +75,7 @@ app.delete('/orders/:_id', (req, res) => {
 
 // Retrieve all dishes
 app.get('/dishes', (req, res) => {
-    let query1 = "SELECT * FROM Dishes;";
+    let query1 = "SELECT * FROM Dishes ORDER BY dishName ASC;";
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -86,7 +86,7 @@ app.get('/dishesByIngredient/:ingredientName', (req, res) => {
     let query1 = `SELECT Dishes.dishID, dishName, price, Dishes.spiceLevel, currentMenu, stockLevel FROM Dishes
     JOIN DishIngredients ON Dishes.dishID = DishIngredients.dishID
     JOIN Ingredients ON DishIngredients.ingredientID = Ingredients.ingredientID
-    WHERE ingredientName = '${req.params.ingredientName}';`;
+    WHERE ingredientName = '${req.params.ingredientName}' ORDER BY dishName ASC;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -118,7 +118,7 @@ app.delete('/dishes/:_id', (req, res) => {
 
 // Retrieve all Ingredients
 app.get('/ingredients', (req, res) => {
-    let query1 = "SELECT * FROM Ingredients;";
+    let query1 = "SELECT * FROM Ingredients ORDER BY ingredientName ASC;";
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -151,7 +151,7 @@ app.delete('/ingredients/:_id', (req, res) => {
 // Retrieve all OrderDishes, displaying Dishes.dishName instead of OrderDishes.dishID
 app.get('/orderDishes', (req, res) => {
     let query1 = `SELECT orderDishID, orderID, dishName, quantity FROM OrderDishes
-    JOIN Dishes ON OrderDishes.dishID = Dishes.dishID;`;
+    JOIN Dishes ON OrderDishes.dishID = Dishes.dishID ORDER BY orderID ASC;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -183,7 +183,7 @@ app.delete('/orderDishes/:_id', (req, res) => {
 
 // Retrieve all servers
 app.get('/servers', (req, res) => {
-    let query1 = "SELECT * FROM Servers;";
+    let query1 = "SELECT * FROM Servers ORDER BY serverName ASC;";
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -217,7 +217,7 @@ app.delete('/servers/:_id', (req, res) => {
 
 // Retrieve all Suppliers
 app.get('/suppliers', (req, res) => {
-    let query1 = "SELECT * FROM Suppliers;";
+    let query1 = "SELECT * FROM Suppliers ORDER BY supplierName ASC;";
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -253,7 +253,7 @@ app.delete('/suppliers/:_id', (req, res) => {
 app.get('/dishIngredients', (req, res) => {
     let query1 = `SELECT dishIngredientID, dishName, ingredientName, gramQty, isRaw FROM DishIngredients
     JOIN Dishes ON DishIngredients.dishID = Dishes.dishID
-    JOIN Ingredients ON DishIngredients.ingredientID = Ingredients.ingredientID;`;
+    JOIN Ingredients ON DishIngredients.ingredientID = Ingredients.ingredientID ORDER BY dishName ASC;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -287,7 +287,7 @@ app.delete('/dishIngredients/:_id', (req, res) => {
 app.get('/purchases', (req, res) => {
     let query1 = `SELECT purchaseID, supplierName, ingredientName, costPerGram, gramQtyPurchased, purchaseDate, actualShelfLifeDays FROM Purchases
     JOIN Suppliers ON Purchases.supplierID = Suppliers.supplierID
-    JOIN Ingredients ON Purchases.ingredientID = Ingredients.ingredientID;`;
+    JOIN Ingredients ON Purchases.ingredientID = Ingredients.ingredientID ORDER BY purchaseDate DESC;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
@@ -321,7 +321,7 @@ app.delete('/purchases/:_id', (req, res) => {
 app.get('/ingredientSubstitutes', (req, res) => {
     let query1 = `SELECT ingredientSubstituteID, Ingredients.ingredientName AS ingredientName, Substitutes.ingredientName AS substituteName FROM IngredientSubstitutes
     JOIN Ingredients ON IngredientSubstitutes.ingredientID = Ingredients.ingredientID
-    JOIN Ingredients AS Substitutes ON IngredientSubstitutes.substituteID = Substitutes.ingredientID;`;
+    JOIN Ingredients AS Substitutes ON IngredientSubstitutes.substituteID = Substitutes.ingredientID ORDER BY ingredientName ASC;`;
     pool.query(query1, (error, rows, fields) => {
         res.send(rows);
     })
