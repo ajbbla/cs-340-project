@@ -84,6 +84,7 @@ function CreateOrderPage({ servers, dishes, addOrderDish, loadOrders, orders }) 
             </div>
             <div>
             <h2>Add Order Details</h2>
+            <h3>DateTime must be in format: YY-MM-DD HH:MM:SS</h3>
                 <input
                     type="text"
                     placeholder="Enter dateTime here"
