@@ -4,6 +4,7 @@ import React from 'react';
 import DishIngredientList from '../components/DishIngredientList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewDishIngredientsPage({ setDishIngredientToEdit }) {
     const [dishIngredients, setDishIngredients] = useState([]);
@@ -36,6 +37,8 @@ function ViewDishIngredientsPage({ setDishIngredientToEdit }) {
 
     return (
         <>
+            <Link to="/add-dishIngredient">Go to Create DishIngredient Page</Link>
+            <br></br>
             <h2>List of DishIngredients</h2>
             <DishIngredientList dishIngredients={dishIngredients} onDelete={onDelete} onEdit={onEdit}></DishIngredientList>
         </>

@@ -4,6 +4,7 @@ import React from 'react';
 import IngredientSubstituteList from '../components/IngredientSubstituteList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewIngredientSubstitutesPage({ setIngredientSubstituteToEdit }) {
     const [ingredientSubstitutes, setIngredientSubstitutes] = useState([]);
@@ -36,6 +37,8 @@ function ViewIngredientSubstitutesPage({ setIngredientSubstituteToEdit }) {
 
     return (
         <>
+            <Link to="/add-ingredientSubstitute">Go to Create IngredientSubstitute Page</Link>
+            <br></br>
             <h2>List of IngredientSubstitutes</h2>
             <IngredientSubstituteList ingredientSubstitutes={ingredientSubstitutes} onDelete={onDelete} onEdit={onEdit}></IngredientSubstituteList>
         </>

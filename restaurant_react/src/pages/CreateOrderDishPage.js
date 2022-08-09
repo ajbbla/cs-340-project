@@ -50,6 +50,7 @@ function CreateOrderDishPage({ orders, dishes }) {
                 value={quantity}
                 onChange={e => setQuantity(e.target.value)} />
             <button
+                // onClick={addOrderDish(orderID, dishName, quantity, history)}
                 onClick={addOrderDish}
             >Add</button>
         </div>

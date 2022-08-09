@@ -4,6 +4,7 @@ import React from 'react';
 import ServerList from '../components/ServerList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewServersPage({ setServerToEdit, servers, setServers, loadServers }) {
     const history = useHistory();
@@ -29,6 +30,8 @@ function ViewServersPage({ setServerToEdit, servers, setServers, loadServers }) 
 
     return (
         <>
+            <Link to="/add-server">Go to Create Server Page</Link>
+            <br></br>
             <h2>List of Servers</h2>
             <ServerList servers={servers} onDelete={onDelete} onEdit={onEdit}></ServerList>
         </>

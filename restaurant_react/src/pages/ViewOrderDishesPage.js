@@ -4,6 +4,7 @@ import React from 'react';
 import OrderDishList from '../components/OrderDishList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewOrderDishesPage({ setOrderDishToEdit }) {
     const [orderDishes, setOrderDishes] = useState([]);
@@ -36,6 +37,8 @@ function ViewOrderDishesPage({ setOrderDishToEdit }) {
 
     return (
         <>
+            <Link to="/add-orderDish">Go to Create OrderDish Page</Link>
+            <br></br>
             <h2>List of OrderDishes</h2>
             <OrderDishList orderDishes={orderDishes} onDelete={onDelete} onEdit={onEdit}></OrderDishList>
         </>

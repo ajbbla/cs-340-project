@@ -4,6 +4,7 @@ import React from 'react';
 import SupplierList from '../components/SupplierList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewSuppliersPage({ setSupplierToEdit, suppliers, setSuppliers, loadSuppliers }) {
     const history = useHistory();
@@ -29,6 +30,8 @@ function ViewSuppliersPage({ setSupplierToEdit, suppliers, setSuppliers, loadSup
 
     return (
         <>
+            <Link to="/add-supplier">Go to Create Supplier Page</Link>
+            <br></br>
             <h2>List of Suppliers</h2>
             <SupplierList suppliers={suppliers} onDelete={onDelete} onEdit={onEdit}></SupplierList>
         </>

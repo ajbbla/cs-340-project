@@ -4,6 +4,7 @@ import React from 'react';
 import IngredientList from '../components/IngredientList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients, loadIngredients, loadSubstitutes }) {
     const history = useHistory();
@@ -31,6 +32,8 @@ function ViewIngredientsPage({ setIngredientToEdit, ingredients, setIngredients,
 
     return (
         <>
+            <Link to="/add-ingredient">Go to Create Ingredient Page</Link>
+            <br></br>
             <h2>List of Ingredients</h2>
             <IngredientList ingredients={ingredients} onDelete={onDelete} onEdit={onEdit}></IngredientList>
         </>
